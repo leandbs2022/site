@@ -72,7 +72,9 @@ $senha = "";
 
                             <?php
                             if (isset($_POST['entrar'])) {
+
                                 require("./conectar.php");
+
                                 $senha = $_POST['login'];
                                 $nome = $_POST['password'];
 
@@ -95,7 +97,7 @@ $senha = "";
                                 }
                             }
                             ?>
-                            <div id="formFooter" >
+                            <div id="formFooter">
                                 <a class="underlineHover" href="recuperar.php">Esqueceu a senha?</a>
                             </div>
 

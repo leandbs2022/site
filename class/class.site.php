@@ -1,7 +1,9 @@
 <?php
 class site
 {
-    //Login de entrada - verificação de entrada
+    //Login de entrada
+
+    //verificação de entrada
     function login($nome, $senha)
     {
         require("./conectar.php");
@@ -23,6 +25,7 @@ class site
                     }
                     $jaVisitou = @$_SESSION["jaVisitou"];
                     $linha = file("contador.txt");
+
                     if ($jaVisitou) {
                         $visitas = $linha[0];
                     } else {
@@ -46,15 +49,6 @@ class site
 
     function login_add_alt()
     {
-        require("./conectar.php");
-
-        $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
-        if (mysqli_num_rows($query)) {
-           
-            return $query;
-        } else {
-            echo "<script>alert('Este usuário ja existe!!')</script>";
-        }  
     }
     function login_del()
     {
@@ -143,6 +137,7 @@ class site
     function pdf()
     {
     }
+
     //contador de acesso
     function contador_ver()
     {

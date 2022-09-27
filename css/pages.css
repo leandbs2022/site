@@ -4,14 +4,11 @@ body {
     background-color: aliceblue;
     margin: 0;
     padding: 0;
-    overflow-y: hidden; 
-    overflow-x: hidden;
+
 }
 
 .titulo {
     margin-top: 10px;
-    margin-left: 15px;
-    margin-right:15px;
 }
 
 #pesq {
@@ -57,17 +54,14 @@ footer#rodape p {
     text-align: center;
 }
 
-    @media only screen and (max-width: 780px) {
+    @media only screen and (max-width: 510px) {
        
        div#usuarios{
             margin: auto;
             padding: auto; 
             float: left;
-        }
-        body{
+            background-color: #606060;
+            
 
-            overflow-y: scroll; 
-            overflow-x: scroll;
         }
-    
     }

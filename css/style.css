@@ -23,15 +23,7 @@ body {
 .direita {
     text-align: right;
 }
-.scroll-escondido {
-   
-   /* overflow:scroll;*/
-   overflow-y: hidden;
 
-}
-#telas{
-    
-}
 .button {
     padding: auto;
     width: 50px;
@@ -40,15 +32,7 @@ body {
     background-color: #e3f2fd;
     border-radius: 5px;
 }
-footer#rodape{
-    text-align: center;
-    justify-items: center;
-    justify-content: center;
-    display:contents;
-    background-color: #0a0a0a;
-    color: #cccccc;
- 
- }
+
 header {
     padding: 0px;
     color: #121212;
