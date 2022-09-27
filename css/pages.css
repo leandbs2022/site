@@ -1,0 +1,73 @@
+body {
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+    background-color: aliceblue;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden; 
+    overflow-x: hidden;
+}
+
+.titulo {
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right:15px;
+}
+
+#pesq {
+    flex-flow: row;
+    justify-items: right;
+    padding-bottom: 10px;
+}
+
+.esquerda {
+
+    margin-left: 0;
+}
+
+.centro {
+    text-align: center;
+
+}
+
+.direita {
+    text-align: right;
+}
+
+.borda {
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px#0a0a0a;
+}
+
+.button {
+    padding: auto;
+    width: 100px;
+    height: 35px;
+    color: #121212;
+    background-color: #e3f2fd;
+    border-radius: 5px;
+}
+
+footer#rodape {
+    clear: both;
+    border-top: 1px solid #606060;
+}
+
+footer#rodape p {
+    text-align: center;
+}
+
+    @media only screen and (max-width: 780px) {
+       
+       div#usuarios{
+            margin: auto;
+            padding: auto; 
+            float: left;
+        }
+        body{
+
+            overflow-y: scroll; 
+            overflow-x: scroll;
+        }
+    
+    }
