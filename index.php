@@ -15,6 +15,10 @@ $_SESSION["nome"] = "";
 $_SESSION["perfil"] = 0;
 $_SESSION['data'] = "";
 $_SESSION['nivel'] = "";
+
+$_SESSION["nome_l"] = "";
+$_SESSION['email_l'] = "";
+
 //Variaveis
 $nome = "";
 $senha = "";

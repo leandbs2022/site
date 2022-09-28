@@ -1,7 +1,4 @@
-function alerta() {
-  var valor = document.getElementById('botao').value
-  alert('O valor é ')
-}
+
 function toggleFullScreen() {
   if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
    (!document.mozFullScreen && !document.webkitIsFullScreen)) {

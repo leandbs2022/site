@@ -1,9 +1,9 @@
 
 <?php
 //dados BD
-$servername = "179.188.16.95";
-$username = "cursophp";
-$password = "lbs031182";
+$servername = "localhost";
+$username = "root";
+$password = "";
 $dbname = "cursophp";
 //Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);

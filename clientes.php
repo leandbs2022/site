@@ -25,7 +25,7 @@ $resposta = $db->validar();
 <body>
     <header class="container">
         <div class="mt-md-1">
-            <div class="row">
+            <div class="row ajuste">
                 <h1 class="alert alert-primary titulo centro borda" style="background-color: #e3f2fd;">Clientes</h1>
 
                 <form method="post" id="fcontato" action="" oninput="cal_total();">

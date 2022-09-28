@@ -6,9 +6,16 @@ body {
     padding: 0;
 
 }
+.ajuste{
 
+    padding-left: 25px;
+    padding-right: 25px; 
+}
 .titulo {
+
     margin-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px; 
 }
 
 #pesq {
@@ -34,6 +41,7 @@ body {
 .borda {
     border-radius: 10px;
     box-shadow: 5px 5px 5px 5px#0a0a0a;
+
 }
 
 .button {

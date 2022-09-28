@@ -46,13 +46,6 @@ class site
             echo "<script>alert('Acesso negado tente novamente nome incorreto!')</script>";
         }
     }
-
-    function login_add_alt()
-    {
-    }
-    function login_del()
-    {
-    }
     //verificação se esta logado
     function validar()
     {
@@ -62,14 +55,56 @@ class site
     }
 
     //Cadastro de usuarios
-    function usuario_add_alt()
+    function usuario_add_alt($nome, $senha, $perfil, $email)
     {
+        $error = "";
+        require("./conectar.php");
+        $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+        if (mysqli_num_rows($query)) {
+            echo "<script>alert('o usuário ja existe!')</script>";
+        } else {
+            $cript = base64_encode($senha);
+            $query = mysqli_query($conn, "INSERT INTO `usuarios`(`nome`, `senha`, `perfil`, `email`) VALUES ('$nome','$cript','$perfil','$email')") or die(mysqli_error($error));
+            echo "<script>alert('o usuário criado com sucesso!')</script>";
+        }
     }
     function usuario_del()
     {
     }
-    function localizar_usuario()
+    function localizar_usuario($nome)
     {
+        $error = "";
+        require("./conectar.php");
+        $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+        if (mysqli_num_rows($query)) {
+            $estilos[0] = "background-color: #e3f2fd;font-size:18px;color:black;font-style:bold;font-family:Arial;
+      text-align: center; width:auto;";
+            echo "<table style=\"width: auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
+      <td style=\"$estilos[0]\">Usuário</td>
+      <td style=\"$estilos[0]\">Perfil</td>
+      <td style=\"$estilos[0]\">E-mail</td>";
+            while ($array = mysqli_fetch_row($query)) {
+
+                $estilos[1] = "background-color: white;font-size:16px;color:black;
+                font-style:bold;font-family: Times New Roman, Times, serif;
+                text-align: center;width: 75%;";
+
+                echo "<tr>
+            
+            <td style=\"$estilos[1]\">$array[1]</td>
+            <td style=\"$estilos[1]\">$array[3]</td>
+            <td style=\"$estilos[1]\">$array[4]</td>
+
+           
+             </tr>";
+
+                $_SESSION["nome_l"] = $array[1];
+                $_SESSION["perfil_l"] = $array[3];
+                $_SESSION['email_l'] = $array[4];
+            }
+        } else {
+            echo "<script>alert('Niguém encontrado com esse nome!')</script>";
+        }
     }
 
 

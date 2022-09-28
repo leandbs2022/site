@@ -52,10 +52,10 @@ $resposta = $db->validar();
           </a>
           <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#" onclick="frame(pages = 1) ">Clientes</a></li>
-            <li><a class="dropdown-item" href="#" onclick="frame(pages = 2) ">Funcionarios</a></li>
+            <li><a class="dropdown-item disabled" href="#" onclick="frame(pages = 2) " >Funcionarios</a></li>
           <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#" onclick="frame(pages = 3) ">Produtos</a></li>
-            <li><a class="dropdown-item" href="#" onclick="frame(pages = 4) ">Fornecedores</a></li>
+            <li><a class="dropdown-item disabled" href="#" onclick="frame(pages = 3) ">Produtos</a></li>
+            <li><a class="dropdown-item disabled" href="#" onclick="frame(pages = 4) ">Fornecedores</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" onclick="frame(pages = 5) ">Usuários</a></li>
           </ul>

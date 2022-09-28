@@ -1,9 +1,9 @@
 @charset "utf8";
 
-form{
+/*form{
     width:500px;
     margin: auto;
-}
+}*/
 input,textarea{
     font-family: sans-serif;
     font-weight:normal ;
@@ -27,9 +27,7 @@ fieldset{
     border-color: #cecece;
     margin: 20px;
 }
-fieldset#sexo{
-    width:150px;  
-}
+
 fieldset#usuario{
     background: url("../img/icone-contato.png") no-repeat 95% 95%;
     
