@@ -52,12 +52,6 @@ body {
     background-color: #e3f2fd;
     border-radius: 5px;
 }
-
-footer#rodape {
-    clear: both;
-    border-top: 1px solid #606060;
-}
-
 footer#rodape p {
     text-align: center;
 }

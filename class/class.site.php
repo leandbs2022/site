@@ -68,12 +68,34 @@ class site
             echo "<script>alert('o usuário criado com sucesso!')</script>";
         }
     }
-    function usuario_del()
+    function usuario_del($nome, $deletar)
     {
+
+        if (empty($nome)) {
+            echo "<script>alert('Faça uma busca do usuário a ser deletado depois click em deletar!')</script>";
+        } else {
+            if ($deletar == true) {
+                require("./conectar.php");
+                $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+                if (mysqli_num_rows($query)) {
+                    while ($array = mysqli_fetch_row($query)) {
+                        $id = $array[0];
+                        
+                    }
+                    if ($deletar == true) {
+                        $query = mysqli_query($conn, "DELETE FROM `usuarios` WHERE id='$id'");
+                        echo "<script>alert('o usuário deletado com sucesso!')</script>";
+                    }
+                }else{
+                    
+                    echo "<script>alert('Verificar se usuário que deseja deleta realmente existe!')</script>";
+                }
+            }
+        }
     }
     function localizar_usuario($nome)
     {
-        $error = "";
+
         require("./conectar.php");
         $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
         if (mysqli_num_rows($query)) {

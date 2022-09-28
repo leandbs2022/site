@@ -59,7 +59,16 @@ $perfil = "";
         }
     }
 
+    if (isset($_POST['talterar'])) {
+        echo "<script>alert('recurso não disponivel')</script>";
+    }
 
+    if (isset($_POST['tdel'])) {
+            echo "<script>let result = confirm('Deseja relamente deleta? Não será possivel recuperar os dados.')</script>";
+            $deletar = "<script>document.write(result)</script>";
+            $nome = $_POST['tnome'];
+            $resposta = $db->usuario_del($nome,$deletar);
+        } 
     ?>
     <header class="container">
         <div class="mt-md-1">

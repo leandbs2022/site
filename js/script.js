@@ -1,4 +1,23 @@
 
+function alerta(){
+  /* if(document.getElementById("cPadrao").checked == true){ let valor = "1"
+   ['<? =$selecionado= ?>'] = valor
+}
+   if(document.getElementById("ccavan").checked == true){ let valor = "2"
+
+}
+   if(document.getElementById("cadmin").checked == true){let valor = "3"
+
+}*/
+
+let result = confirm("Deseja relamente deleta")
+alert(result)
+
+ }
+
+
+
+
 function toggleFullScreen() {
   if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
    (!document.mozFullScreen && !document.webkitIsFullScreen)) {
