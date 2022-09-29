@@ -72,13 +72,12 @@ $senha = "";
                             <input type="text" name="login" id="login" />
                             <label for="password">Password:</label>
                             <input type="password" name="password" id="password" />
-                            <input type="submit" class="fadeIn fourth" id="entrar" name="entrar" value="Entrar" onclick="alerta()">
+                            <input type="submit" class="fadeIn fourth" id="entrar" name="entrar" value="Entrar" onclick="">
 
                             <?php
                             if (isset($_POST['entrar'])) {
 
                                 require("./conectar.php");
-
                                 $senha = $_POST['login'];
                                 $nome = $_POST['password'];
 
@@ -92,10 +91,13 @@ $senha = "";
                                         $nome = "Administrador";
                                         $senha = "123admin";
                                         $cript = base64_encode($senha);
-                                        $perfil = 10;
+                                        $perfil = 1;
+                                        $email="admin@empresa.com.br";
+
                                         $_SESSION["nome"] = "$nome";
-                                        $_SESSION["perfil"] = 10;
-                                        $query = mysqli_query($conn, "INSERT INTO `usuarios`(`nome`, `senha`, `perfil`) VALUES ('$nome','$cript','$perfil')");
+                                        $_SESSION["perfil"] = $perfil;
+
+                                        $query = mysqli_query($conn, "INSERT INTO `usuarios`(`nome`, `senha`, `perfil`, `email`) VALUES ('$nome','$cript','$perfil','$email')");
                                         echo "<script>alert('Esse e seu primeiro acesso. O usuario administrador foi criando a e senha 123admin. Apos o acesso favor mudar a senha para sua seguranca')</script>";
                                     }
                                 }

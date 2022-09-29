@@ -38,11 +38,17 @@ fieldset#endereco{
     
 }
 fieldset#mensagem{
+    
     background: url("../img/icone-mensagem.png") no-repeat 95% 95%;
     
 }
 fieldset#cliente{
-    background: url("../img/icon-cliente.svg")  no-repeat 95% 95%;
-   
-    
+    background: url("../img/icon-cliente.svg")  no-repeat 95% 95%;    
+
+}
+
+.novo{
+    background: url("../img/new.ico")  no-repeat 95% 95%; 
+    width: 20px;
+    height: 20px;   
 }

@@ -10,6 +10,7 @@ $senha = "";
 $perfil = "";
 $email = "";
 $perfil = "";
+$desabilite = "disabled";
 ?>
 <!DOCTYPE html>
 <html lang="pt=br">
@@ -28,7 +29,7 @@ $perfil = "";
     <title>cadastro de Usuários</title>
 </head>
 
-<body>
+<body onload="cal_total()">
     <?php
     if (isset($_POST['tlocaliza'])) {
         $nome = $_POST['tloc'];
@@ -36,39 +37,7 @@ $perfil = "";
         $email = $_SESSION['email_l'];
         $nome =  $_SESSION["nome_l"];
     }
-    if (isset($_POST['tcadastro'])) {
-        $escolha = @$_POST['tperfil']; // Usado @, já que vai ser testado em seguida.
-        if (empty($escolha)) $perfil = '0';
-        else if ($escolha == '1') $perfil = '1';
-        else if ($escolha == '2') $perfil = '2';
-        else if ($escolha == '3') $perfil = '10';
-        //dados campos
-        $nome = $_POST['tnome'];
-        $senha = $_POST['tsenha'];
-        $confime = $_POST['tconfimr'];
-        $email = $_POST['tmail'];
-        $permissao = $_SESSION["perfil"];
-        if ($permissao == 10) {
-            if ($senha <> $confime) {
-                echo "<script>alert('A Senha não confere!Favor digite novamente.')</script>";
-            } else {
-                $resposta = $db->usuario_add_alt($nome, $senha, $perfil, $email);
-            }
-        } else {
-            echo "<script>alert('Você não tem permissão de adicionar usuário.')</script>";
-        }
-    }
 
-    if (isset($_POST['talterar'])) {
-        echo "<script>alert('recurso não disponivel')</script>";
-    }
-
-    if (isset($_POST['tdel'])) {
-            echo "<script>let result = confirm('Deseja relamente deleta? Não será possivel recuperar os dados.')</script>";
-            $deletar = "<script>document.write(result)</script>";
-            $nome = $_POST['tnome'];
-            $resposta = $db->usuario_del($nome,$deletar);
-        } 
     ?>
     <header class="container">
         <div class="mt-md-1">
@@ -77,35 +46,96 @@ $perfil = "";
             </div>
         </div>
     </header>
-    <div class="mt-md-1">
-        <div id="usuarios" class="row">
-            <form method="post" id="fcontato" action="" id="cform" oninput="cal_total();">
+    <form method="post" action="" id="cform" onload="limpar()" >
+        <div class="mt-md-1">
+            <div id="usuarios" class="row">
+
                 <hgroup>
                     <h1 class="centro">Formulário de Usuários</h1>
                 </hgroup>
-                <fieldset id="usuario flex_fiel">
+                <fieldset id="cliente">
                     <legend>Identificação do Usuário</legend>
-                    <p>Nome: <input type="text" name="tnome" id="cnome" value="<?php echo $nome; ?>" size="20" maxlength="20" placeholder="nome"></p>
-                    <p>Senha:<input type="password" name="tsenha" id="csenha" value="" size="8" maxlength="8" placeholder="senha"> Confirme:<input type="password" name="tconfimr" id="tconfirme" size="8" maxlength="8" placeholder="confirme"></p>
-                    <p>E-mail:<input type="text" name="tmail" id="cmail" size="20" maxlength="40" placeholder="e-mail"> <label><?php echo "Email atual: {$email}"; ?></label></p>
-                    <fieldset id="nivel">
+                    <p>Nome: <input type="text" name="tnome" id="cnome" value="<?php echo $nome; ?>" size="20" maxlength="20"></p>
+                    <p>Senha:<input type="password" name="tsenha" id="csenha" value="" size="8" maxlength="8"> Confirme:<input type="password" name="tconfimr" id="tconfirme" size="8" maxlength="8"></p>
+                    <p>E-mail:<input type="text" name="tmail" id="cmail" size="20" maxlength="40" value="<?php echo $email; ?>"></p>
+                    <fieldset id="nivel" class="perfil">
                         <legend>Perfil</legend>
-                        <input type="radio" name="tperfil" id="cPadrao" value="1" checked><label for="cPadrão">Administrativo</label> <br>
-                        <input type="radio" name="tperfil" id="cavan" value="2"><label for="cavan">Vendedor</label> <br>
-                        <input type="radio" name="tperfil" id="cadmin" value="3"><label for="cadmin">Gerente do sistema</label>
-                    </fieldset>
-                    <fieldset>
-                        <p><input type="submit" class="button" id="ccadastro" name="tcadastro" value="Novo"> | <input type="submit" class="button" id="calterar" name="talterar" value="Alterar"> | <input type="submit" class="button" id="cdel" name="tdel" value="Deletar"></p>
+                        <select class="bordaT" id="cper" name="tper">
+                            <option value="1"> Administardor</option>
+                            <option value="2"> Administrativo</option>
+                            <option value="3"> Gerencia</option>
+                            <option value="4"> Diretoria</option>
+                        </select>
                     </fieldset>
 
-                    <fieldset>
-                        <p><input type="submit" class="button" id="clocaliza" name="tlocaliza" value="pesquisar"><input type="text" size="23" maxlength="30" id="cloc" name="tloc" placeholder="digite nome"> </p>
-                    </fieldset>
                 </fieldset>
+                <fieldset>
+                    <p><input type="submit" class="button novo" id="ccadastro" name="tcadastro" value="Novo"> | <input type="submit" class="button" id="calt" name="talt" value="Alterar"> | <input type="submit" class="button" id="cdel" name="tdel" value="Deletar"> | <input type="submit" class="button" id="clocaliza" name="tlocaliza" value="pesquisar"> &nbsp;
+                        <label for="tloc"><img class="imgdireira" src="img/dedodireita.svg" ></label>
+                    <select id="cloc" name="tloc" class="bordaT">
+                            <?php
+                            require("./conectar.php");
+                            $query = mysqli_query($conn, "SELECT * from usuarios where 1");
+                            if (mysqli_num_rows($query)) {
+                                while ($array1 = mysqli_fetch_row($query)) {
+                                    $direto = $array1[1];
+                                    echo "<option>{$direto}</option>";
+                                }
+                            }
 
-            </form>
+                            ?>
+                        </select>
+                    </p>
+                </fieldset>
+                <div>
+                    <?php
+
+                    if (isset($_POST['tcadastro'])) {
+
+                        /*$escolha = @$_POST['tperfil']; // Usado @, já que vai ser testado em seguida.
+                        if (empty($escolha)) $perfil = '0';
+                        else if ($escolha == '1') $perfil = '1';
+                        else if ($escolha == '2') $perfil = '2';
+                        else if ($escolha == '3') $perfil = '10';*/
+                        //dados campos
+                        $perfil = $_POST['tper'];
+                        $nome = $_POST['tnome'];
+                        $senha = $_POST['tsenha'];
+                        $confime = $_POST['tconfimr'];
+                        $email = $_POST['tmail'];
+                        $permissao = $_SESSION["perfil"];
+                        echo $permissao;
+                        if ($permissao == "1") {
+                            if ($senha <> $confime) {
+                                echo "<script>alert('A Senha não confere!Favor digite novamente.')</script>";
+                            } else {
+                                echo '2';
+                                $resposta = $db->usuario_add($nome, $senha, $perfil, $email);
+                            }
+                        } else {
+                            echo "<script>alert('Você não tem permissão de adicionar usuário.')</script>";
+                        }
+                    }
+
+                    if (isset($_POST['talt'])) {
+                       
+                        $nome = $_POST['tnome'];
+                        $resposta = $db->usuario_alt($nome, $senha, $perfil, $email);
+                    }
+
+                    if (isset($_POST['tdel'])) {
+                        echo "<script>let result = confirm('Deseja relamente deleta? Não será possivel recuperar os dados.')</script>";
+                        $deletar = "<script>document.write(result)</script>";
+                        $nome = $_POST['tnome'];
+                        $resposta = $db->usuario_del($nome, $deletar);
+                    }
+
+                    ?>
+                </div>
+
+            </div>
         </div>
-    </div>
+    </form>
 </body>
 
 </html>

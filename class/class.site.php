@@ -55,19 +55,40 @@ class site
     }
 
     //Cadastro de usuarios
-    function usuario_add_alt($nome, $senha, $perfil, $email)
+    function usuario_add($nome, $senha, $perfil, $email)
     {
-        $error = "";
         require("./conectar.php");
         $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+
         if (mysqli_num_rows($query)) {
-            echo "<script>alert('o usuário ja existe!')</script>";
+            echo "<script>alert('O usuário ja existe!')</script>";
         } else {
             $cript = base64_encode($senha);
-            $query = mysqli_query($conn, "INSERT INTO `usuarios`(`nome`, `senha`, `perfil`, `email`) VALUES ('$nome','$cript','$perfil','$email')") or die(mysqli_error($error));
+            $query = mysqli_query($conn, "INSERT INTO `usuarios`(`nome`, `senha`, `perfil`, `email`) VALUES ('$nome','$cript','$perfil','$email')");
             echo "<script>alert('o usuário criado com sucesso!')</script>";
         }
     }
+    function usuario_alt($nome, $senha, $perfil, $email)
+    {
+        if (empty($nome)) {
+            echo "<script>alert('Faça uma busca do usuário a ser alterado depois click em alterar!')</script>";
+        } else {
+
+            require("./conectar.php");
+            $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+            if (mysqli_num_rows($query)) {
+                while ($array = mysqli_fetch_row($query)) {
+                    $id = $array[0];
+                }
+                $cript = base64_encode($senha);
+                $query = mysqli_query($conn, "UPDATE `usuarios` SET `senha`='$cript',`perfil`='$perfil',`email`='$email' WHERE id='$id'");
+                echo "<script>alert('o usuário atualizado com sucesso!')</script>";
+            }else{
+                echo "<script>alert('o usuário não existe!')</script>";
+            }
+        }
+    }
+
     function usuario_del($nome, $deletar)
     {
 
@@ -80,14 +101,13 @@ class site
                 if (mysqli_num_rows($query)) {
                     while ($array = mysqli_fetch_row($query)) {
                         $id = $array[0];
-                        
                     }
                     if ($deletar == true) {
                         $query = mysqli_query($conn, "DELETE FROM `usuarios` WHERE id='$id'");
                         echo "<script>alert('o usuário deletado com sucesso!')</script>";
                     }
-                }else{
-                    
+                } else {
+
                     echo "<script>alert('Verificar se usuário que deseja deleta realmente existe!')</script>";
                 }
             }

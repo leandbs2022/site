@@ -17,7 +17,18 @@ body {
     padding-left: 20px;
     padding-right: 20px; 
 }
+.bordaT{
 
+    border-style: dotted;
+    border-radius: 10px;
+}
+.perfil{
+    width: 310px;
+}
+.imgdireira{
+    width: 15px;
+    height: 15px;
+}
 #pesq {
     flex-flow: row;
     justify-items: right;
