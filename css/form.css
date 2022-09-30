@@ -1,9 +1,9 @@
 @charset "utf8";
 
-/*form{
-    width:500px;
-    margin: auto;
-}*/
+form{  
+   /* width:100px;
+    margin: auto;*/
+}
 input,textarea{
     font-family: sans-serif;
     font-weight:normal ;
@@ -34,19 +34,19 @@ fieldset#usuario{
 }
 fieldset#endereco{
     background: url("../img/icon-localizar.svg") no-repeat 95% 95%;
-    back
     
 }
+
 fieldset#mensagem{
     
     background: url("../img/icone-mensagem.png") no-repeat 95% 95%;
     
 }
+
 fieldset#cliente{
     background: url("../img/icon-cliente.svg")  no-repeat 95% 95%;    
 
 }
-
 .novo{
     background: url("../img/new.ico")  no-repeat 95% 95%; 
     width: 20px;

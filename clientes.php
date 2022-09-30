@@ -34,44 +34,43 @@ $resposta = $db->validar();
                     </hgroup>
                     <fieldset id="cliente">
                         <legend>Identificação do Cliente</legend>
-                        <p><label for="cnome">Nome:</label><input type="text" name="tnome " id="cnome" size="20" maxlength="20" placeholder="nome completo"></p>
-                        <p>Senha:<input type="text" name="tsenha" id="csenha" size="8" maxlength="8" placeholder="senha"></p>
-                        <p>E-mail:<input type="email" name="tmail" id="cmail" size="20" maxlength="40" placeholder="e-mail"></p>
+                        <p><label for="cnome">Nome:</label><input type="text"  class="bordasimples espaco" name="tnome " id="cnome" size="20" maxlength="20" placeholder="nome completo"></p>
+                        <p><label for="ctel">Tel:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="bordasimples" name="ttel" id="ctel" size="11" maxlength="11" placeholder="Telefone"></p>
+                        <p><label for="ccel"> Cel:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="bordasimples" name="tcel" id="ccel" size="11" maxlength="11" placeholder="Celular"></p>
+                        <p><label for="cemail">E-mail:</label>&nbsp;<input type="email" name="tmail" id="cmail" class="bordasimples" size="20" maxlength="40" placeholder="e-mail"></p>
+                        <p><label for="cobs">OBS:</label><input type="text" class="bordasimples" name="tobs" id="cobs" size="80" maxlength="80" ></p>
                         <fieldset id="sexo">
                             <legend>sexo</legend>
                             <input type="radio" name="tgenero" id="cmasc" checked><label for="cmasc">Masculino</label> <br>
                             <input type="radio" name="tgenero" id="cfem"><label for="cfem">Feminino</label>
                         </fieldset>
-                        <p>Data de Nascimento:<input type="date" name="tnasc " id="cnasc"></p>
+                        <p>Data de Nascimento:<input type="date" class="bordasimples" name="tnasc " id="cnasc"></p>
                     </fieldset>
                     <fieldset id="endereco">
                         <legend>Endereço do Cliente</legend>
-                        <p><label for="crua">Logradouro:</label><input type="text" name="trua" id="crua" size="40" maxlength="80" placeholder="endereço"></p>
-                        <p><label for="cnum">Número:</label><input type="number" name="tnum" id="cnum" mix="0" max="999" placeholder="">
+                        <p><label for="ccep">Cep:</label><input type="text" class="bordasimples" name="tcep" id="ccep" size="12" maxlength="12" placeholder="cep"></p>
+                        <p><label for="crua">Log.:</label><input type="text" class="bordasimples" name="trua" id="crua" size="40" maxlength="80" placeholder="endereço"></p>
+                        <p><label for="cnum">Nº:</label>&nbsp;&nbsp;<input class="bordasimples" type="number" name="tnum" id="cnum" mix="0" max="999" placeholder="">
+                        <p><label for="ccom">Complemento:</label><input class="bordasimples" type="number" name="tcom" id="ccom" mix="0" max="999" placeholder="">
                         </p>
                         <p><label for="cest">Estado:</label>
-                            <select name="test" id="cest">
-                                <optgroup label="Centro oeste">
-                                    <option value="DF">Brasília</option>
-                                    <option value="GO" disabled>Goías</option>
-                                </optgroup>
-                                <optgroup label="Sudeste">
-                                    <option value="SP" disabled>São Paulo</option>
-                                    <option value="RJ" disabled>Rio de Janeiro</option>
-                                </optgroup>
-                                <optgroup label="Sul">
-                                    <option value="RS" disabled>Rio grande do Sul</option>
-                                    <option value="PR" disabled>Parana</option>
-                                </optgroup>
+                            <select class="bordasimples" name="test" id="cest">
+                                    <option  value="DF">DF</option> 
                             </select>
                         </p>
                         <p><label for="ccid">Cidade:</label>
-                            <input type="text" name="tcid" id="ccid" maxlength="40" size="20" placeholder="cidade" list="cidade" />
+                            <input type="text"class="bordasimples" name="tcid" id="ccid" maxlength="40" size="20" placeholder="cidade" list="cidade" />
                         </p>
                         <datalist id="cidade">
                             <option value="Brasilia"></option>
                             <option value="Ceilândia"></option>
                             <option value="Gama"></option>
+                            <option value="Samambaia"></option>
+                            <option value="Guara"></option>
+                            <option value="Santa Maria"></option>
+                            <option value="Riacho Fundo"></option>
+                            <option value="Recanto das Emas"></option>
+                            <option value="Riacho Fundo II"></option>
                         </datalist>
                     </fieldset>
                     <fieldset>

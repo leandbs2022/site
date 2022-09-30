@@ -1,7 +1,7 @@
 <?php
-class site
+class site //classe - Funcões
 {
-    //Login de entrada
+    //////////////////////////////////////////////Login de entrada//////////////////////////////////////////////////
 
     //verificação de entrada
     function login($nome, $senha)
@@ -54,7 +54,7 @@ class site
         }
     }
 
-    //Cadastro de usuarios
+    /////////////////////////////////////////Cadastro de usuarios////////////////////////////////////////////////
     function usuario_add($nome, $senha, $perfil, $email)
     {
         require("./conectar.php");
@@ -68,8 +68,13 @@ class site
             echo "<script>alert('o usuário criado com sucesso!')</script>";
         }
     }
+
+    //alterar usuarios
     function usuario_alt($nome, $senha, $perfil, $email)
     {
+        echo $senha;
+
+
         if (empty($nome)) {
             echo "<script>alert('Faça uma busca do usuário a ser alterado depois click em alterar!')</script>";
         } else {
@@ -83,12 +88,12 @@ class site
                 $cript = base64_encode($senha);
                 $query = mysqli_query($conn, "UPDATE `usuarios` SET `senha`='$cript',`perfil`='$perfil',`email`='$email' WHERE id='$id'");
                 echo "<script>alert('o usuário atualizado com sucesso!')</script>";
-            }else{
+            } else {
                 echo "<script>alert('o usuário não existe!')</script>";
             }
         }
     }
-
+    //deleta usuarios
     function usuario_del($nome, $deletar)
     {
 
@@ -113,6 +118,7 @@ class site
             }
         }
     }
+    //localizar usuarios
     function localizar_usuario($nome)
     {
 
@@ -149,8 +155,7 @@ class site
         }
     }
 
-
-    //Cadastro de clientes
+    ///////////////////////////////////////////////////Cadastro de clientes///////////////////////////////////////////////////
     function cliente_add_alt()
     {
     }

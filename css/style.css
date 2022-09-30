@@ -1,9 +1,9 @@
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
-    background-color: aliceblue;
+    background-color:white;
     margin: 0;
-    padding: 0;
+    padding: 0;  
 }
 
 .titulo {
@@ -12,7 +12,7 @@ body {
 
 .esquerda {
 
-    margin-left: 0;
+    text-align: left;
 }
 
 .centro {
@@ -37,6 +37,7 @@ body {
     display:contents;
     background-color: #0a0a0a;
     color: #cccccc;
+    text-align: right;
 }
 header {
     padding: 0px;
@@ -69,8 +70,7 @@ iframe {
     padding-top: 100px;
     width: 100%;
     height: 100vh;
-    overflow-y:hidden;
-
+    
 }
 
 

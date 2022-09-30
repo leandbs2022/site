@@ -64,7 +64,9 @@ header#cabecalho h2{
     width: 450px;
     margin-left: 0px;
 }
-/*formatação de imagens*/
+/*
+
+atação de imagens*/
  figure.foto-legenda img{
     right: 250%;
     width: 450px;

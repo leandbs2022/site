@@ -1,0 +1,131 @@
+body {
+    height: 100vh;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+
+}
+
+.ajuste {
+
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.titulo {
+    margin-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.card {
+    background-color: cornflowerblue;
+    color: #e3f2fd
+}
+.card1 {
+    background-color:orange;
+    color: #e3f2fd
+}
+.card2 {
+    background-color:#606060;
+    color: #e3f2fd
+}
+.card3 {
+    background-color:darkorchid;
+    color: #e3f2fd
+}
+#titulob {
+    font-size: 14px;
+    font-weight: bold;
+}
+#indice {
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px 5px#0a0a0a;
+    font-size:10px;
+    font-style: italic;
+}
+.bordaindice{
+border-radius: 20%;
+}
+#resultado {
+    font-size: 25px;
+    font-weight: bold;
+}
+.bordaT {
+
+    border-style: dotted;
+    border-radius: 10px;
+}
+
+.perfil {
+    width: 310px;
+}
+
+.bordapad {
+    padding-right: 100px;
+
+}
+
+.imgdireira {
+    align-items: center;
+    justify-items: right;
+}
+
+.menu {
+    display: list-item;
+    color: #606060
+}
+
+#pesq {
+    flex-flow: row;
+    justify-items: right;
+    padding-bottom: 10px;
+}
+
+.esquerda {
+
+    margin-left: 0;
+}
+
+.centro {
+    text-align: center;
+
+}
+
+.direita {
+    text-align: right;
+}
+
+.borda {
+
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px 5px#0a0a0a;
+
+}
+
+.button {
+    padding: auto;
+    width: 100px;
+    height: 35px;
+    color: #121212;
+    background-color: #e3f2fd;
+    border-radius: 5px;
+}
+
+footer#rodape p {
+    text-align: center;
+}
+
+@media only screen and (max-width: 510px) {
+
+    div#usuarios {
+        margin: auto;
+        padding: auto;
+        float: left;
+        background-color: #606060;
+
+
+    }
+}

@@ -87,7 +87,9 @@ $resposta = $db->validar();
     </div>
   </section>
   <footer class="container">
-    <p class="rodape centro">Desenvolvidor por Leandro Barbosa de Souza<br /><a class="rodape" href="https://leandbs2022.github.io/portfolio/" target="_blank">Portfolío</a> | <a class="rodape" href="https://github.com/leandbs2022" target="_blank">Github</a>
+    <p class="centro">Desenvolvidor por Leandro Barbosa de Souza<br />
+    <a class="rodape" href="https://leandbs2022.github.io/portfolio/" target="_blank">Portfolío</a> |
+     <a class="rodape" href="https://github.com/leandbs2022" target="_blank">Github</a>
     </p>
   </footer>
 </body>
