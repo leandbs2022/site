@@ -1,44 +1,57 @@
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
-    background-color:white;
+    background-color: white;
     margin: 0;
     padding: 0;
-   
+
 
 }
-.ajuste{
+
+.ajuste {
 
     padding-left: 25px;
-    padding-right: 25px; 
+    padding-right: 25px;
 }
+
 .titulo {
     margin-top: 10px;
     padding-left: 20px;
-    padding-right: 20px; 
-    
+    padding-right: 20px;
+
 }
-.espaco{
+
+label {
+    text-align: left;
+    width: 100px;
+    float: left;
+}
+
+.espaco {
 
     right: 500px;
-padding-left: 5px;
-padding-top: 5px;
-padding-bottom: 5px;
-padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
 
 }
-.bordaT{
+
+.bordaT {
 
     border-style: dotted;
     border-radius: 10px;
 }
-.perfil{
+
+.perfil {
     width: 310px;
 }
-.imgdireira{
+
+.imgdireita {
     width: 15px;
     height: 15px;
 }
+
 #pesq {
     flex-flow: row;
     justify-items: right;
@@ -66,11 +79,13 @@ padding-right: 5px;
     box-shadow: 1px 1px 1px 1px#0a0a0a;
 
 }
+
 .borda {
     border-radius: 10px;
     box-shadow: 5px 5px 5px 5px#0a0a0a;
 
 }
+
 .button {
     padding: auto;
     width: 100px;
@@ -79,31 +94,35 @@ padding-right: 5px;
     background-color: #e3f2fd;
     border-radius: 5px;
 }
+
 footer#rodape p {
     text-align: center;
 }
+
 @media only screen and (min-width: 1366px) {
-    body{
+    body {
 
         font-family: "Poppins", sans-serif;
-    height: 100vh;
-    background-color:white;
-    margin: 0;
-    padding: 0;
-    overflow-y: scroll;
+        height: 100vh;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+        overflow-y: scroll;
     }
-    form{  
-        width:500px;
-         margin: auto;
-     }
 
- }
-    @media only screen and (max-width: 510px) {
-       
-       div#usuarios{
-            margin: auto;
-            padding: auto; 
-            float: left;
-            background-color: #606060;
-        }
+    form {
+        width: 500px;
+        margin: auto;
     }
+
+}
+
+@media only screen and (max-width: 510px) {
+
+    div#usuarios {
+        margin: auto;
+        padding: auto;
+        float: left;
+        background-color: #606060;
+    }
+}

@@ -24,7 +24,7 @@ $permissao = $_SESSION["perfil"];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>-->
     <link rel="icon" type="image/x-icon" href="/img/favico.ico">
     <link rel="stylesheet" href="css/pages.css">
-    
+
     <link rel="stylesheet" type="text/css" href="css/form.css" />
     <script src="js/script.js"></script>
     <script src="js/funcoes.js"></script>
@@ -48,7 +48,7 @@ $permissao = $_SESSION["perfil"];
             </div>
         </div>
     </header>
-    <form method="post" action="" id="cform" onload="limpar()" >
+    <form method="post" action="" id="cform" onload="limpar()">
         <div class="mt-md-1">
             <div id="usuarios" class="row">
 
@@ -58,7 +58,7 @@ $permissao = $_SESSION["perfil"];
                 <fieldset id="cliente">
                     <legend>Identificação do Usuário</legend>
                     <p>Nome: <input type="text" class="bordasimples" name="tnome" id="cnome" value="<?php echo $nome; ?>" size="20" maxlength="20"></p>
-                    <p>Senha:<input type="password" class="bordasimples"name="tsenha" id="csenha" value="" size="8" maxlength="8"> Confirme:<input type="password" class="bordasimples" name="tconfimr" id="tconfirme" size="8" maxlength="8"></p>
+                    <p>Senha:<input type="password" class="bordasimples" name="tsenha" id="csenha" value="" size="8" maxlength="8"> Confirme:<input type="password" class="bordasimples" name="tconfimr" id="tconfirme" size="8" maxlength="8"></p>
                     <p>E-mail:<input type="text" class="bordasimples" name="tmail" id="cmail" size="20" maxlength="40" value="<?php echo $email; ?>"></p>
                     <fieldset id="nivel" class="perfil bordasimples">
                         <legend>Perfil</legend>
@@ -72,9 +72,8 @@ $permissao = $_SESSION["perfil"];
 
                 </fieldset>
                 <fieldset>
-                    <p><input type="submit" class="button" id="ccadastro" name="tcadastro" value="Novo"> | <input type="submit" class="button" id="calt" name="talt" value="Alterar"> | <input type="submit" class="button" id="cdel" name="tdel" value="Deletar"> | <input type="submit" class="button" id="clocaliza" name="tlocaliza" value="pesquisar"> &nbsp;
-                        <label for="tloc"><img class="imgdireira" src="img/dedodireita.svg" ></label>
-                    <select id="cloc" name="tloc" class="bordaT">
+                    <p><input type="submit" class="button" id="ccadastro" name="tcadastro" value="Novo"> | <input type="submit" class="button" id="calt" name="talt" value="Alterar"> | <input type="submit" class="button" id="cdel" name="tdel" value="Deletar"> | <input type="submit" class="button" id="clocaliza" name="tlocaliza" value="pesquisar">
+                        <img class="imgdireita" src="img/dedodireita.svg"><select id="cloc" name="tloc" class="bordaT">
                             <?php
                             require("./conectar.php");
                             $query = mysqli_query($conn, "SELECT * from usuarios where 1");
@@ -105,13 +104,13 @@ $permissao = $_SESSION["perfil"];
                         $senha = $_POST['tsenha'];
                         $confime = $_POST['tconfimr'];
                         $email = $_POST['tmail'];
-                        
-         
+
+
                         if ($permissao == "1") {
                             if ($senha <> $confime) {
                                 echo "<script>alert('A Senha não confere!Favor digite novamente.')</script>";
                             } else {
-            
+
                                 $resposta = $db->usuario_add($nome, $senha, $perfil, $email);
                             }
                         } else {
@@ -120,27 +119,39 @@ $permissao = $_SESSION["perfil"];
                     }
 
                     if (isset($_POST['talt'])) {
-                       
+
                         $perfil = $_POST['tper'];
                         $nome = $_POST['tnome'];
                         $senha = $_POST['tsenha'];
                         $confime = $_POST['tconfimr'];
                         $email = $_POST['tmail'];
 
-                        if ($permissao == "1"){
+                        if ($permissao == "1") {
                             if ($senha <> $confime) {
                                 echo "<script>alert('A Senha não confere!Favor digite novamente.')</script>";
                             } else {
-                             $resposta = $db->usuario_alt($nome, $senha, $perfil, $email);
+                                $resposta = $db->usuario_alt($nome, $senha, $perfil, $email);
                             }
-                            }else{echo "<script>alert('Você não tem permissão de adicionar usuário.')</script>";}
+                        } else {
+                            echo "<script>alert('Você não tem permissão para essa função.')</script>";
+                        }
                     }
 
                     if (isset($_POST['tdel'])) {
-                        echo "<script>let result = confirm('Deseja relamente deleta? Não será possivel recuperar os dados.')</script>";
-                        $deletar = "<script>document.write(result)</script>";
-                        $nome = $_POST['tnome'];
-                        if ($permissao == "1"){ $resposta = $db->usuario_del($nome, $deletar);}else{echo "<script>alert('Você não tem permissão de adicionar usuário.')</script>";}
+                       
+                        if ($permissao == "1") {
+                            echo "<script>let result = confirm('Deseja relamente deleta? Não será possivel recuperar os dados.')</script>";
+                            $deletar = "<script>document.write(result)</script>";
+                            $nome = $_POST['tnome'];
+                            if ($permissao == "1") {
+                                $resposta = $db->usuario_del($nome, $deletar);
+                            } else {
+                                echo "<script>alert('Você não tem permissão de adicionar usuário.')</script>";
+                            }
+                        } else {
+                            echo "<script>alert('Você não tem permissão para essa função.')</script>";
+                        }
+                       
                     }
 
                     ?>

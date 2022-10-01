@@ -2,8 +2,18 @@
 session_start();
 //conexão a classes
 require('./class/class.site.php');
+require("./conectar.php");
 $db = new site;
 $resposta = $db->validar();
+$clientes = 0;
+$pedidos = 0;
+$lucro = 0;
+$crescimento = 0;
+$count= 0;
+//carregando dados clientes cadastrados no mês atual
+$query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE 1");
+if (mysqli_num_rows($query)) { while ($array = mysqli_fetch_row($query)) { $count = $count + 1; } $clientes = $count;}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt=br">
@@ -38,22 +48,22 @@ $resposta = $db->validar();
                 <div class="row">
                     <div class="col-md-2 mx-auto bordaindice card centro">
                         <p id="titulob">Clientes</p>
-                        <p id="resultado">36.254</p>
+                        <p id="resultado"><?php echo $clientes; ?></p>
                         <p id="indice">Crescimento nos últimos 30 diase</p>
                     </div>
                     <div class="col-md-2 mx-auto bordaindice card1 centro">
                         <p id="titulob">Pedidos</p>
-                        <p id="resultado">36.254</p>
+                        <p id="resultado"><?php echo $pedidos; ?></p>
                         <p id="indice">Crescimento nos últimos 30 dias</p>
 </div>
                     <div class="col-md-2 mx-auto bordaindice card2 centro">
                     <p id="titulob">Lucro</p>
-                    <p id="resultado">36.254</p>
+                    <p id="resultado"><?php echo $lucro; ?></p>
                     <p id="indice">Crescimento nos últimos 30 dias</p>
                 </div>
                 <div class="col-md-2  mx-auto bordaindice card3 centro">
                     <p id="titulob">Crescimento</p>
-                    <p id="resultado">36.254</p>
+                    <p id="resultado"><?php echo $crescimento; ?></p>
                     <p id="indice">Crescimento nos ultimos 30 dias</p>
                 </div>
             </div>

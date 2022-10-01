@@ -27,28 +27,27 @@ fieldset{
     border-color: #cecece;
     margin: 20px;
 }
-
 fieldset#usuario{
     background: url("../img/icone-contato.png") no-repeat 95% 95%;
     
 }
 fieldset#endereco{
-    background: url("../img/icon-localizar.svg") no-repeat 95% 95%;
+    background: url("../img/icone-endereco.png") no-repeat 95% 95%;
     
 }
-
 fieldset#mensagem{
     
     background: url("../img/icone-mensagem.png") no-repeat 95% 95%;
     
 }
-
 fieldset#cliente{
-    background: url("../img/icon-cliente.svg")  no-repeat 95% 95%;    
+    background: url("../img/cliente3.png")  no-repeat 95% 95%;    
+    background-position:right;
+
 
 }
-.novo{
-    background: url("../img/new.ico")  no-repeat 95% 95%; 
-    width: 20px;
-    height: 20px;   
+@media only screen and (min-width: 1366px) {
+
+
+
 }

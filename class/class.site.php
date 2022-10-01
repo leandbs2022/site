@@ -156,17 +156,50 @@ class site //classe - Funcões
     }
 
     ///////////////////////////////////////////////////Cadastro de clientes///////////////////////////////////////////////////
-    function cliente_add_alt()
+    function cliente_add($nome, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad)
     {
+        require("./conectar.php");
+        $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE email='$email'");
+        if (mysqli_num_rows($query)) {
+            echo "<script>alert('Este cliente já existe!')</script>";
+        } else {
+
+            $nome =   ucwords($nome);
+            $obs =  ucwords($obs);
+            $tgenero =  ucwords($tgenero);
+            $endereco = strtoupper($endereco);
+            $estado =  strtoupper($estado);
+            $cidade =  ucwords($cidade);
+            $complemento =  ucwords($complemento);
+
+            $query = mysqli_query($conn, "INSERT INTO `clientes`(`nome`, `endereco`, `estado`, `cidade`, `cep`, `tel`, `cel`, `sexo`, `email`, `data_nasc`, `data`, `obs`,`lote`,`comple`) 
+            VALUES ('$nome','$endereco','$estado','$cidade','$cep','$tel','$cel','$tgenero','$email','$dt_nasc','$dt_cad','$obs','$casa','$complemento')") or die(mysqli_error($conn));
+            echo "<script>alert('o usuário criado com sucesso!')</script>";
+        }
     }
+    function cliente_alt($nome, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad)
+    {
+        require("./conectar.php");
+        $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE email='$email'");
+        if (mysqli_num_rows($query)) {
+            $nome =   ucwords($nome);
+            $obs =  ucwords($obs);
+            $tgenero =  ucwords($tgenero);
+            $endereco = strtoupper($endereco);
+            $estado =  strtoupper($estado);
+            $cidade =  ucwords($cidade);
+            $complemento =  ucwords($complemento);
+
+            $query = mysqli_query($conn, "UPDATE `clientes` SET `nome`='$nome',`endereco`='$endereco',`estado`='$estado',`cidade`='$cidade',`cep`='$cep',`tel`='$tel',`cel`='$cel',`sexo`='$tgenero',`email`='$email',`data_nasc`='$dt_nasc',`data`='$dt_cad',
+            `obs`='$obs',`lote`='$casa',`comple`='$complemento' WHERE 1") or die(mysqli_error($conn));
+            echo "<script>alert('o usuário alterado com sucesso!')</script>";
+        }
+    }
+    
     function cliente_del()
     {
     }
-    function localizar_clientes()
-    {
-    }
-
-
+   
     //Cadastro de funcionario
     function funcionario_add_alt()
     {
