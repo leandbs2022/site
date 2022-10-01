@@ -1,5 +1,4 @@
 @charset "utf8";
-
 form{  
    /* width:100px;
     margin: auto;*/
@@ -16,6 +15,10 @@ input:hover{
 textarea:hover{
     background-color: #dddddd;
     text-decoration: un;
+   }
+   h6{
+        color:#cecece
+
    }
 legend{
     color:#888888;

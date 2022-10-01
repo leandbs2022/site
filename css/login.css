@@ -1,5 +1,5 @@
 body {
-    background-color: #f6f6f6;
+    background-color: #2E2E2E;
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
@@ -55,6 +55,10 @@ h2 {
     margin: 40px 8px 10px 8px;
     color: #cccccc;
 }
+.fontebranca{
+    color: #cccccc;
+    
+    }
 .wrapper {
     display: flex;
     align-items: center;
@@ -68,7 +72,7 @@ h2 {
 #formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
-    background: #fff;
+    background: #2E2E2E;
     padding: 30px;
     width: 90%;
     max-width: 450px;
@@ -80,7 +84,7 @@ h2 {
 }
 
 #formFooter {
-    background-color: #f6f6f6;
+    background-color: #2E2E2E;
     border-top: 1px solid #dce8f1;
     padding: 5px;
     text-align: center;
@@ -95,15 +99,17 @@ h2.inactive {
 
 h2.active {
     color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid #2E2E2E;
 }
 
 
 input[type=button],
 input[type=submit],
 input[type=reset],
-input[type=password] {
-    background-color: #5fbae9;
+input[type=password],
+input[type=text]
+{
+    background-color: #2E2E2E;
     border: none;
     color: white;
     padding: 15px 80px;
@@ -112,8 +118,8 @@ input[type=password] {
     display: inline-block;
     text-transform: uppercase;
     font-size: 13px;
-    -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
-    box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+    -webkit-box-shadow: 0 10px 30px 0 rgba(250, 248, 236, 0.4);
+    box-shadow: 0 10px 30px 0 rgba(250, 248, 236, 0.4);
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     margin: 5px 20px 40px 20px;
@@ -128,7 +134,7 @@ input[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover,
 input[type=password]:hover {
-    background-color: #39ace7;
+    background-color: #cccccc;
 }
 
 input[type=button]:active,
@@ -165,7 +171,7 @@ input[type=text] {
 
 input[type=text]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid #2E2E2E;
 }
 
 input[type=text]:placeholder {
@@ -197,7 +203,7 @@ input[type=password] {
 
 input[type=password]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid #2E2E2E;
 }
 
 input[type=password]:placeholder {

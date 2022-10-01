@@ -1,11 +1,25 @@
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
-    background-color:white;
+    background-color:#2E2E2E;
     margin: 0;
     padding: 0;  
 }
+.fonte{
+font-family:Arial, Helvetica, sans-serif ;
+font-size: 18px;
+font-style: italic;
+}
 
+.fontebranca{
+color: #cccccc;
+
+}
+
+.titulonav{
+background-color: #2E2E2E;
+color: #cccccc;
+}
 .titulo {
     margin-top: 10px;
 }
@@ -29,8 +43,8 @@ body {
     padding: auto;
     width: 50px;
     height:35px;
-    color: #121212;
-    background-color: #e3f2fd;
+    color: #cccccc;
+    background-color: #0a0a0a;
     border-radius: 5px;
 }
 .rodape {
@@ -41,21 +55,27 @@ body {
 }
 header {
     padding: 0px;
-    color: #121212;
-    background-color: #e3f2fd;
+    color:white;
+    background-color: #292727;
     font-size: 12px;
-    height: 15px;
+    height: 18px;
     border-radius: 10px;
     width: 100%;
+    text-align: right;
 }
 
+.imgtitulo {
+ 
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+
+}
 .logo {
-    width: 40px;
+    width: 100px;
     height: 40px;
     border-radius: 10px;
-
 }
-
 .borda {
     border-radius: 5px;
     box-shadow: 5px 5px 5px 5px#0a0a0a;

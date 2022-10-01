@@ -68,9 +68,9 @@ $senha = "";
                             <img class="imagem_icon" src="img/entrada.png" id="icon" alt="User Icon" />
                         </div>
                         <form method="post" action="">
-                            <label for="Login">Usuário:</label>
+                            <label class="fontebranca" for="Login">Usuário:</label>
                             <input type="text" name="login" id="login" />
-                            <label for="password">Password:</label>
+                            <label class='fontebranca' for="password">Password:</label>
                             <input type="password" name="password" id="password" />
                             <input type="submit" class="fadeIn fourth" id="entrar" name="entrar" value="Entrar" onclick="">
 

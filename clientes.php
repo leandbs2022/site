@@ -44,11 +44,11 @@ $permissao = $_SESSION["perfil"];
     <header class="container">
         <div class="mt-md-1">
             <div class="row ajuste">
-                <h1 class="alert alert-primary titulo centro borda" style="background-color: #e3f2fd;">Clientes</h1>
+                <h1 class="alert alert-primary titulo centro borda fontebranca">Clientes</h1>
 
                 <form method="post" id="fcontato" action="" oninput="cal_total();">
                     <hgroup>
-                        <h1 class="centro">Formulário de cliente</h1>
+                        <h1 class="centro fontebranca">Formulário de cliente</h1>
                         <?php
                         if (isset($_POST['tlocaliza'])) {
                             $nome = $_POST['tloc'];
@@ -83,39 +83,39 @@ $permissao = $_SESSION["perfil"];
 
                     <fieldset id="cliente">
                         <legend>Identificação do Cliente</legend>
-                        <p>ID:<?php echo $id; ?></p>
-                        <p><label for="cnome">Nome:</label><input type="text" class="bordasimples espaco" value="<?php echo $nome; ?>" name="tnome" id="cnome" size="20" maxlength="40" placeholder="nome completo"></p>
-                        <p><label for="ctel">Tel:</label><input type="text" class="bordasimples" value="<?php echo $tel; ?>" name="ttel" id="ctel" size="11" maxlength="11" placeholder="Telefone"></p>
-                        <p><label for="ccel"> Cel:</label><input type="text" class="bordasimples" value="<?php echo $cel; ?>" name="tcel" id="ccel" size="11" maxlength="11" placeholder="Celular"></p>
-                        <p><label for="cemail">E-mail:</label>&nbsp;<input type="email" value="<?php echo $email; ?>" name="tmail" id="cmail" class="bordasimples" size="20" maxlength="40" placeholder="e-mail"></p>
-                        <p><label for="cobs">OBS:</label><input type="text" class="bordasimples" value="<?php echo $obs; ?>" name="tobs" id="cobs" size="80" maxlength="80"></p>
+                        <p class="fontebranca">ID:<?php echo $id; ?></p>
+                        <p><label class="fontebranca" for="cnome">Nome:</label><input type="text" class="bordasimples espaco " value="<?php echo $nome; ?>" name="tnome" id="cnome" size="20" maxlength="40" placeholder="nome completo"></p>
+                        <p><label class="fontebranca"for="ctel">Tel:</label><input type="text" class="bordasimples" value="<?php echo $tel; ?>" name="ttel" id="ctel" size="11" maxlength="11" placeholder="Telefone"></p>
+                        <p><label class="fontebranca"for="ccel"> Cel:</label><input type="text" class="bordasimples" value="<?php echo $cel; ?>" name="tcel" id="ccel" size="11" maxlength="11" placeholder="Celular"></p>
+                        <p><label class="fontebranca"for="cemail">E-mail:</label>&nbsp;<input type="email" value="<?php echo $email; ?>" name="tmail" id="cmail" class="bordasimples" size="20" maxlength="40" placeholder="e-mail"></p>
+                        <p><label class="fontebranca"for="cobs">OBS:</label><input type="text" class="bordasimples" value="<?php echo $obs; ?>" name="tobs" id="cobs" size="80" maxlength="80"></p>
                         <fieldset id="sexo" class="bordasimples">
                             <legend>Dados pessoais</legend>
-                            <p><label for="tgenero">Sexo:</label>
+                            <p><label class="fontebranca"for="tgenero">Sexo:</label>
                                 <select class="bordasimples" name="tgenero" id="cgenero">
                                     <option value="0"><?php echo $tgenero; ?></option>
                                     <option value="1">Masculino</option>
                                     <option value="2">Feminino</option>
                                 </select>
                             </p>
-                            <p>Data de Nascimento:<input type="date" value="<?php echo $dt_nasc; ?>" class="bordasimples" name="tnasc" id="cnasc"></p>
+                            <p><label class="fontebranca"for="cnasc">Data de Nascimento:</label><input type="date" value="<?php echo $dt_nasc; ?>" class="bordasimples" name="tnasc" id="cnasc"></p>
                         </fieldset>
 
                     </fieldset>
                     <fieldset id="endereco">
                         <legend>Endereço do Cliente</legend>
-                        <p><label for="ccep">Cep:</label><input type="text" value="<?php echo $cep; ?>" class="bordasimples" name="tcep" id="ccep" size="12" maxlength="12" placeholder="cep"></p>
-                        <p><label for="crua">Log.:</label><input type="text" value="<?php echo $endereco; ?>" class="bordasimples" name="trua" id="crua" size="40" maxlength="80" placeholder="endereço"></p>
-                        <p><label for="cnum">Nº:</label><input class="bordasimples" value="<?php echo $casa; ?>" type="number" name="tnum" id="cnum" mix="0" max="999" placeholder="">
-                        <p><label for="ccom">Complemento:</label><input class="bordasimples" type="text" value="<?php echo $complemento; ?>" name="tcom" id="ccom" placeholder="">
+                        <p><label class="fontebranca"for="ccep">Cep:</label><input type="text" value="<?php echo $cep; ?>" class="bordasimples" name="tcep" id="ccep" size="12" maxlength="12" placeholder="cep"></p>
+                        <p><label class="fontebranca"for="crua">Log.:</label><input type="text" value="<?php echo $endereco; ?>" class="bordasimples" name="trua" id="crua" size="40" maxlength="80" placeholder="endereço"></p>
+                        <p><label class="fontebranca"for="cnum">Nº:</label><input class="bordasimples" value="<?php echo $casa; ?>" type="number" name="tnum" id="cnum" mix="0" max="999" placeholder="">
+                        <p><label class="fontebranca"for="ccom">Complemento:</label><input class="bordasimples" type="text" value="<?php echo $complemento; ?>" name="tcom" id="ccom" placeholder="">
                         </p>
-                        <p><label for="cest">Estado:</label>
+                        <p><label for="cest" class="fontebranca">Estado:</label>
                             <select class="bordasimples" name="test" id="cest">
                                 <option><?php echo $estado; ?></option>
                                 <option value="DF">DF</option>
                             </select>
                         </p>
-                        <p><label for="ccid">Cidade:</label>
+                        <p><label class="fontebranca"for="ccid">Cidade:</label>
                             <input type="text" class="bordasimples" name="tcid" id="ccid" maxlength="40" size="20" value="<?php echo $cidade; ?>" placeholder="cidade" list="cidade" />
                         </p>
                         <datalist id="cidade">

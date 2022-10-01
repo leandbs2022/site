@@ -37,8 +37,8 @@ if (mysqli_num_rows($query)) { while ($array = mysqli_fetch_row($query)) { $coun
     <header class="container-fluid">
         <div class="mt-md-1">
             <div class="row">
-                <h1 class="alert alert-primary titulo centro borda" style="background-color: #e3f2fd;">DashBord</h1>
-                <input type="submit" class="btn btn-primary" value="Alterar tela" onclick="toggleFullScreen()">
+                <h1 class="alert alert-dark titulo centro borda" style="color:#cccccc; background-color:#292727;">DashBord</h1>
+                <input type="submit" class="btn btn-dark"  style="background-color:#292727" value="Alterar tela" onclick="toggleFullScreen()">
             </div>
         </div>
     </header>
@@ -46,22 +46,22 @@ if (mysqli_num_rows($query)) { while ($array = mysqli_fetch_row($query)) { $coun
         <div class="container">
             <div class="mt-md-2">
                 <div class="row">
-                    <div class="col-md-2 mx-auto bordaindice card centro">
+                    <div class="col-md-2 mx-auto bordaindice card centro borda">
                         <p id="titulob">Clientes</p>
                         <p id="resultado"><?php echo $clientes; ?></p>
                         <p id="indice">Crescimento nos últimos 30 diase</p>
                     </div>
-                    <div class="col-md-2 mx-auto bordaindice card1 centro">
+                    <div class="col-md-2 mx-auto bordaindice card1 centro borda">
                         <p id="titulob">Pedidos</p>
                         <p id="resultado"><?php echo $pedidos; ?></p>
                         <p id="indice">Crescimento nos últimos 30 dias</p>
 </div>
-                    <div class="col-md-2 mx-auto bordaindice card2 centro">
+                    <div class="col-md-2 mx-auto bordaindice card2 centro borda">
                     <p id="titulob">Lucro</p>
                     <p id="resultado"><?php echo $lucro; ?></p>
                     <p id="indice">Crescimento nos últimos 30 dias</p>
                 </div>
-                <div class="col-md-2  mx-auto bordaindice card3 centro">
+                <div class="col-md-2  mx-auto bordaindice card3 centro borda">
                     <p id="titulob">Crescimento</p>
                     <p id="resultado"><?php echo $crescimento; ?></p>
                     <p id="indice">Crescimento nos ultimos 30 dias</p>

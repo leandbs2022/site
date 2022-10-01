@@ -1,13 +1,24 @@
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
-    background-color: white;
+    background-color:#2E2E2E;
     margin: 0;
-    padding: 0;
+    padding: 0;  
 
 
 }
+.fonte{
 
+    font-family:Arial, Helvetica, sans-serif ;
+    font-size: 18px;
+    font-style: italic;
+    
+    }
+    
+.fontebranca{
+    color: #cccccc;
+    
+    }
 .ajuste {
 
     padding-left: 25px;
@@ -89,9 +100,9 @@ label {
 .button {
     padding: auto;
     width: 100px;
-    height: 35px;
-    color: #121212;
-    background-color: #e3f2fd;
+    height:50px;
+    color: #cccccc;
+    background-color: #0a0a0a;
     border-radius: 5px;
 }
 

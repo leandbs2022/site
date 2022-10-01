@@ -17,26 +17,33 @@ $resposta = $db->validar();
   <link rel="icon" type="image/x-icon" href="/img/favico.ico">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js"></script>
+
   <title>main</title>
 </head>
 
-<body>
+<body >
   <p id="topo"></p>
   <header class="container">
     <div class="mt-md-1">
       <div class="row">
         <div class="col-md-6">
-          <p class="#topo"><?php echo "Login: {$_SESSION['data']} Usuário: {$_SESSION['nome']} Nível: {$_SESSION['nivel']}"; ?></p>
-          <!--<p class="esquerda"><a href="index.php"><input type="submit" class="button" value="Login"></a></p>-->
+          <p class="borda esquerda"><?php echo "Login: {$_SESSION['data']} Usuário: {$_SESSION['nome']} Nível: {$_SESSION['nivel']}"; ?></p>
         </div>
         <div class="col-md-6">
+         
+           <p class="borda direita "> Tecnologias usadas: <img class="imgtitulo" src="img/php.svg" atl="php" title="PHP"> | 
+           <img class="imgtitulo" src="img/javascript.svg" atl="javascript" title="javascript"> | 
+           <img class="imgtitulo" src="img/html.svg" atl="html" title="HTML"> | <img class="imgtitulo" src="img/css.svg" atl="css" title="CSS"> | 
+           <img class="imgtitulo" src="img/bootstrap.svg" atl="bootstrap" title="BOOTSTRAP"> | <img class="imgtitulo" src="img/mysql.svg" atl="mysql" title="MYSQL"> </p>
+    
         </div>
-      </div>
-    </div>
-    <div class="">
-      <nav class="navbar navbar-light navbar-expand-lg borda" style="background-color: #e3f2fd;">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"><img class="logo" src="./img/logo.svg"></a>
+    
+    
+        </div>
+    <div class="container">
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg borda fonte" >
+        <div class="container-fluid  titulonav">
+          <a class="navbar-brand" href="#"><img class="logo" src="./img/logo.png"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -73,10 +80,6 @@ $resposta = $db->validar();
                 <a class="nav-link" href="relatorios.php" target="_black">Relatórios</a>
               </li>
             </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2 " type="search" placeholder="Digite aqui" aria-label="Procurar">
-              <button class="btn btn-outline-dark" type="submit">Procurar</button>
-            </form>
           </div>
         </div>
       </nav>
@@ -84,7 +87,7 @@ $resposta = $db->validar();
   </header>
   <section>
     <div class="container">
-      <iframe id="telas" src="dashbord.php"></iframe>
+      <iframe  class="#topo" id="telas" src="dashbord.php"></iframe>
     </div>
   </section>
   <footer class="container">

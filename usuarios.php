@@ -42,9 +42,10 @@ $permissao = $_SESSION["perfil"];
 
     ?>
     <header class="container">
+   
         <div class="mt-md-1">
             <div class="row ajuste">
-                <h1 class="alert alert-primary titulo centro borda" style="background-color: #e3f2fd;">Usuários</h1>
+                <h1 class="alert alert-primary titulo centro borda fontebranca">Usuários</h1>
             </div>
         </div>
     </header>
@@ -53,13 +54,13 @@ $permissao = $_SESSION["perfil"];
             <div id="usuarios" class="row">
 
                 <hgroup>
-                    <h1 class="centro">Formulário de Usuários</h1>
+                    <h1 class="centro fontebranca">Formulário de Usuários</h1>
                 </hgroup>
                 <fieldset id="cliente">
                     <legend>Identificação do Usuário</legend>
-                    <p>Nome: <input type="text" class="bordasimples" name="tnome" id="cnome" value="<?php echo $nome; ?>" size="20" maxlength="20"></p>
-                    <p>Senha:<input type="password" class="bordasimples" name="tsenha" id="csenha" value="" size="8" maxlength="8"> Confirme:<input type="password" class="bordasimples" name="tconfimr" id="tconfirme" size="8" maxlength="8"></p>
-                    <p>E-mail:<input type="text" class="bordasimples" name="tmail" id="cmail" size="20" maxlength="40" value="<?php echo $email; ?>"></p>
+                    <p><label class='fontebranca'>Nome: </label><input type="text" class="bordasimples " name="tnome" id="cnome" value="<?php echo $nome; ?>" size="20" maxlength="20"></p>
+                    <p><label class='fontebranca'>Senha:</label><input type="password" class="bordasimples" name="tsenha" id="csenha" value="" size="8" maxlength="8"><input type="password" class="bordasimples" name="tconfimr" id="tconfirme" size="8" maxlength="8" placeholder="Confirme"></p>
+                    <p><label class='fontebranca'>E-mail:</label><input type="text" class="bordasimples" name="tmail" id="cmail" size="20" maxlength="40" value="<?php echo $email; ?>"></p>
                     <fieldset id="nivel" class="perfil bordasimples">
                         <legend>Perfil</legend>
                         <select class="bordaT" id="cper" name="tper">
