@@ -125,15 +125,15 @@ class site //classe - Funcões
         require("./conectar.php");
         $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
         if (mysqli_num_rows($query)) {
-            $estilos[0] = "background-color: #e3f2fd;font-size:18px;color:black;font-style:bold;font-family:Arial;
+           /* $estilos[0] = "background-color: #e3f2fd;font-size:18px;color:black;font-style:bold;font-family:Arial;
       text-align: center; width:auto;";
             echo "<table style=\"width: auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
       <td style=\"$estilos[0]\">Usuário</td>
       <td style=\"$estilos[0]\">Perfil</td>
-      <td style=\"$estilos[0]\">E-mail</td>";
+      <td style=\"$estilos[0]\">E-mail</td>";*/
             while ($array = mysqli_fetch_row($query)) {
 
-                $estilos[1] = "background-color: white;font-size:16px;color:black;
+               /* $estilos[1] = "background-color: white;font-size:16px;color:black;
                 font-style:bold;font-family: Times New Roman, Times, serif;
                 text-align: center;width: 75%;";
 
@@ -144,7 +144,7 @@ class site //classe - Funcões
             <td style=\"$estilos[1]\">$array[4]</td>
 
            
-             </tr>";
+             </tr>";*/
 
                 $_SESSION["nome_l"] = $array[1];
                 $_SESSION["perfil_l"] = $array[3];

@@ -50,8 +50,9 @@ label {
 
 .bordaT {
 
-    border-style: dotted;
+    border-style:groove;
     border-radius: 10px;
+    padding: 4px;
 }
 
 .perfil {

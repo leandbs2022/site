@@ -82,41 +82,41 @@ $permissao = $_SESSION["perfil"];
                     </hgroup>
 
                     <fieldset id="cliente">
-                        <legend>Identificação do Cliente</legend>
+                        <legend id="legenda">Identificação do Cliente</legend>
                         <p class="fontebranca">ID:<?php echo $id; ?></p>
                         <p><label class="fontebranca" for="cnome">Nome:</label><input type="text" class="bordasimples espaco " value="<?php echo $nome; ?>" name="tnome" id="cnome" size="20" maxlength="40" placeholder="nome completo"></p>
-                        <p><label class="fontebranca"for="ctel">Tel:</label><input type="text" class="bordasimples" value="<?php echo $tel; ?>" name="ttel" id="ctel" size="11" maxlength="11" placeholder="Telefone"></p>
-                        <p><label class="fontebranca"for="ccel"> Cel:</label><input type="text" class="bordasimples" value="<?php echo $cel; ?>" name="tcel" id="ccel" size="11" maxlength="11" placeholder="Celular"></p>
-                        <p><label class="fontebranca"for="cemail">E-mail:</label>&nbsp;<input type="email" value="<?php echo $email; ?>" name="tmail" id="cmail" class="bordasimples" size="20" maxlength="40" placeholder="e-mail"></p>
-                        <p><label class="fontebranca"for="cobs">OBS:</label><input type="text" class="bordasimples" value="<?php echo $obs; ?>" name="tobs" id="cobs" size="80" maxlength="80"></p>
+                        <p><label class="fontebranca" for="ctel">Tel:</label><input type="text" class="bordasimples" value="<?php echo $tel; ?>" name="ttel" id="ctel" size="11" maxlength="11" placeholder="Telefone"></p>
+                        <p><label class="fontebranca" for="ccel"> Cel:</label><input type="text" class="bordasimples" value="<?php echo $cel; ?>" name="tcel" id="ccel" size="11" maxlength="11" placeholder="Celular"></p>
+                        <p><label class="fontebranca" for="cemail">E-mail:</label>&nbsp;<input type="email" value="<?php echo $email; ?>" name="tmail" id="cmail" class="bordasimples" size="20" maxlength="40" placeholder="e-mail"></p>
+                        <p><label class="fontebranca" for="cobs">OBS:</label><input type="text" class="bordasimples" value="<?php echo $obs; ?>" name="tobs" id="cobs" size="80" maxlength="80"></p>
                         <fieldset id="sexo" class="bordasimples">
                             <legend>Dados pessoais</legend>
-                            <p><label class="fontebranca"for="tgenero">Sexo:</label>
-                                <select class="bordasimples" name="tgenero" id="cgenero">
+                            <p><label class="fontebranca" for="tgenero">Sexo:</label>
+                                <select class="bordasimples bordaT" name="tgenero" id="cgenero">
                                     <option value="0"><?php echo $tgenero; ?></option>
                                     <option value="1">Masculino</option>
                                     <option value="2">Feminino</option>
                                 </select>
                             </p>
-                            <p><label class="fontebranca"for="cnasc">Data de Nascimento:</label><input type="date" value="<?php echo $dt_nasc; ?>" class="bordasimples" name="tnasc" id="cnasc"></p>
+                            <p><label class="fontebranca" for="cnasc">Data de Nascimento:</label><input type="date" value="<?php echo $dt_nasc; ?>" class="bordasimples" name="tnasc" id="cnasc"></p>
                         </fieldset>
 
                     </fieldset>
                     <fieldset id="endereco">
                         <legend>Endereço do Cliente</legend>
-                        <p><label class="fontebranca"for="ccep">Cep:</label><input type="text" value="<?php echo $cep; ?>" class="bordasimples" name="tcep" id="ccep" size="12" maxlength="12" placeholder="cep"></p>
-                        <p><label class="fontebranca"for="crua">Log.:</label><input type="text" value="<?php echo $endereco; ?>" class="bordasimples" name="trua" id="crua" size="40" maxlength="80" placeholder="endereço"></p>
-                        <p><label class="fontebranca"for="cnum">Nº:</label><input class="bordasimples" value="<?php echo $casa; ?>" type="number" name="tnum" id="cnum" mix="0" max="999" placeholder="">
-                        <p><label class="fontebranca"for="ccom">Complemento:</label><input class="bordasimples" type="text" value="<?php echo $complemento; ?>" name="tcom" id="ccom" placeholder="">
+                        <p><label class="fontebranca" for="ccep">Cep:</label><input type="text" value="<?php echo $cep; ?>" class="bordasimples" name="tcep" id="ccep" size="12" maxlength="12" placeholder="cep"></p>
+                        <p><label class="fontebranca" for="crua">Log.:</label><input type="text" value="<?php echo $endereco; ?>" class="bordasimples" name="trua" id="crua" size="40" maxlength="80" placeholder="endereço"></p>
+                        <p><label class="fontebranca" for="cnum">Nº:</label><input class="bordasimples" value="<?php echo $casa; ?>" type="number" name="tnum" id="cnum" mix="0" max="999" placeholder="">
+                        <p><label class="fontebranca" for="ccom">Complemento:</label><input class="bordasimples" type="text" value="<?php echo $complemento; ?>" name="tcom" id="ccom" placeholder="">
                         </p>
                         <p><label for="cest" class="fontebranca">Estado:</label>
-                            <select class="bordasimples" name="test" id="cest">
+                            <select class="bordasimples bordaT" name="test" id="cest">
                                 <option><?php echo $estado; ?></option>
                                 <option value="DF">DF</option>
                             </select>
                         </p>
-                        <p><label class="fontebranca"for="ccid">Cidade:</label>
-                            <input type="text" class="bordasimples" name="tcid" id="ccid" maxlength="40" size="20" value="<?php echo $cidade; ?>" placeholder="cidade" list="cidade" />
+                        <p><label class="fontebranca" for="ccid">Cidade:</label>
+                            <input type="text" class="bordasimples bordaT" name="tcid" id="ccid" maxlength="40" size="20" value="<?php echo $cidade; ?>" placeholder="cidade" list="cidade" />
                         </p>
                         <datalist id="cidade">
                             <option value="Brasilia"></option>
@@ -131,7 +131,10 @@ $permissao = $_SESSION["perfil"];
                         </datalist>
                     </fieldset>
                     <fieldset>
-                        <p><input type="submit" class="button" id="ccadastro" name="tcadastro" value="Novo"> | <input type="submit" class="button" id="calterar" name="talterar" value="Alterar"> | <input type="submit" class="button" id="cdel" name="tdel" value="Deletar">| <input type="submit" class="button" id="clocaliza" name="tlocaliza" value="pesquisar">
+                        <p><input type="submit" class="button" id="ccadastro" name="tcadastro" value="Novo"> |
+                            <input type="submit" class="button" id="calterar" name="talterar" value="Alterar"> |
+                            <input type="submit" class="button" id="cdel" name="tdel" value="Deletar">|
+                            <input type="submit" class="button #legenda" id="clocaliza" name="tlocaliza" value="pesquisar" >
                             <img class="imgdireita" src="img/dedodireita.svg"><select id="cloc" name="tloc" class="bordaT">
                                 <?php
                                 require("./conectar.php");
@@ -190,7 +193,7 @@ $permissao = $_SESSION["perfil"];
                                     $tgenero = 'feminino';
                                     break;
                                 default:
-    
+
                                     break;
                             }
                             $nome =  $_POST['tnome'];
@@ -213,7 +216,6 @@ $permissao = $_SESSION["perfil"];
                     }
                     if (isset($_POST['tdel'])) {
                         if ($permissao == "1") {
-
                         } else {
                             echo "<script>alert('Você não tem permissão para essa função.')</script>";
                         }
