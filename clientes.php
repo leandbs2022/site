@@ -215,6 +215,14 @@ $permissao = $_SESSION["perfil"];
                     }
                     if (isset($_POST['tdel'])) {
                         if ($permissao == "1") {
+                            echo "<script>let result = confirm('Deseja relamente deleta? Não será possivel recuperar os dados.')</script>";
+                            $deletar = "<script>document.write(result)</script>";
+                            $nome = $_POST['tnome'];
+                            if ($permissao == "1") {
+                                $resposta = $db->cliente_del($nome, $deletar);
+                            } else {
+                                echo "<script>alert('Você não tem permissão para deleta cliente.')</script>";
+                            }
                         } else {
                             echo "<script>alert('Você não tem permissão para essa função.')</script>";
                         }

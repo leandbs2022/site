@@ -18,7 +18,7 @@ class site //classe - Funcões
                     $_SESSION['nome'] = $array[1];
                     $_SESSION['perfil'] = $array[3];
                     echo $_SESSION['perfil'];
-                    if ($_SESSION['perfil'] <> 10) {
+                    if ($_SESSION['perfil'] <> 1) {
                         $_SESSION['nivel'] = "Padrão";
                     } else {
                         $_SESSION['nivel'] = "Administrador";
@@ -110,6 +110,8 @@ class site //classe - Funcões
                     if ($deletar == true) {
                         $query = mysqli_query($conn, "DELETE FROM `usuarios` WHERE id='$id'");
                         echo "<script>alert('o usuário deletado com sucesso!')</script>";
+                    }else{
+                        echo "<script>alert('Operação cancelada!')</script>";
                     }
                 } else {
 
@@ -196,8 +198,30 @@ class site //classe - Funcões
         }
     }
     
-    function cliente_del()
+    function cliente_del($nome,$deletar)
     {
+        if (empty($nome)) {
+            echo "<script>alert('Faça uma busca do cliente a ser deletado depois click em deletar!')</script>";
+        } else {
+            if ($deletar == true) {
+                require("./conectar.php");
+                $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE nome='$nome'");
+                if (mysqli_num_rows($query)) {
+                    while ($array = mysqli_fetch_row($query)) {
+                        $id = $array[0];
+                    }
+                    if ($deletar === true) {
+                        $query = mysqli_query($conn, "DELETE FROM `usuarios` WHERE id='$id'");
+                        echo "<script>alert('o cliente deletado com sucesso!')</script>";
+                    }else{
+                        echo "<script>alert('Operação cancelada!')</script>";
+                    }
+                } else {
+
+                    echo "<script>alert('Verificar se cliente que deseja deleta realmente existe!')</script>";
+                }
+            }
+        }  
     }
    
     //Cadastro de funcionario

@@ -4,8 +4,7 @@ body {
     background-color:#2E2E2E;
     margin: 0;
     padding: 0;  
-
-
+    overflow: auto;
 }
 .fonte{
 
@@ -107,7 +106,7 @@ height: 100vh;
     width: 100px;
     height:50px;
     color: #cccccc;
-    background-color: #0a0a0a;
+    background-color: #2E2E2E;
     border-radius: 5px;
 }
 
