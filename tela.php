@@ -17,18 +17,26 @@ $resposta = $db->validar();
     <link rel="icon" type="image/x-icon" href="/img/favico.ico">
     <link rel="stylesheet" href="css/pages.css">
     <script src="js/script.js"></script>
-    <title>relatorios</title>
+    <title></title>
 </head>
 <body>
     <header class="container">
         <div class="mt-md-1">
             <div class="row">
-            <h1 class="alert alert-primary titulo centro borda" style="background-color: #e3f2fd;">Relatórios</h1>
-            </div>
+            <h1 class="alert alert-primary titulo centro borda fontebranca">Projeto de PHP </h1>
         </div>
     </header>
-
-    
+    <section>
+    <div class="container">
+        <img class="phptela" src="img/phptela.jpg" alt="Curso">
+    </div>
+    </section>
+    <footer>
+    <div class="mt-md-1">
+            <div class="row">
+            <h1 class="alert alert-primary titulo centro borda" >Curso Senai </h1>
+        </div>
+    </footer>
 </body>
 
 </html>

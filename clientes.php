@@ -45,7 +45,6 @@ $permissao = $_SESSION["perfil"];
         <div class="mt-md-1">
             <div class="row ajuste">
                 <h1 class="alert alert-primary titulo centro borda fontebranca">Clientes</h1>
-
                 <form method="post" id="fcontato" action="" oninput="cal_total();">
                     <hgroup>
                         <h1 class="centro fontebranca">Formulário de cliente</h1>

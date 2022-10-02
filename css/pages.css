@@ -47,7 +47,11 @@ label {
     padding-right: 5px;
 
 }
+.phptela{
+width: 100%;
+height: 100vh;
 
+}
 .bordaT {
 
     border-style:groove;

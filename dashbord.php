@@ -9,10 +9,15 @@ $clientes = 0;
 $pedidos = 0;
 $lucro = 0;
 $crescimento = 0;
-$count= 0;
+$count = 0;
 //carregando dados clientes cadastrados no mês atual
 $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE 1");
-if (mysqli_num_rows($query)) { while ($array = mysqli_fetch_row($query)) { $count = $count + 1; } $clientes = $count;}
+if (mysqli_num_rows($query)) {
+    while ($array = mysqli_fetch_row($query)) {
+        $count = $count + 1;
+    }
+    $clientes = $count;
+}
 
 ?>
 <!DOCTYPE html>
@@ -38,7 +43,7 @@ if (mysqli_num_rows($query)) { while ($array = mysqli_fetch_row($query)) { $coun
         <div class="mt-md-1">
             <div class="row">
                 <h1 class="alert alert-dark titulo centro borda" style="color:#cccccc; background-color:#292727;">DashBord</h1>
-                <input type="submit" class="btn btn-dark"  style="background-color:#292727" value="Alterar tela" onclick="toggleFullScreen()">
+                <input type="submit" class="btn btn-dark" style="background-color:#292727" value="Alterar tela" onclick="toggleFullScreen()">
             </div>
         </div>
     </header>
@@ -55,35 +60,38 @@ if (mysqli_num_rows($query)) { while ($array = mysqli_fetch_row($query)) { $coun
                         <p id="titulob">Pedidos</p>
                         <p id="resultado"><?php echo $pedidos; ?></p>
                         <p id="indice">Crescimento nos últimos 30 dias</p>
-</div>
+                    </div>
                     <div class="col-md-2 mx-auto bordaindice card2 centro borda">
-                    <p id="titulob">Lucro</p>
-                    <p id="resultado"><?php echo $lucro; ?></p>
-                    <p id="indice">Crescimento nos últimos 30 dias</p>
-                </div>
-                <div class="col-md-2  mx-auto bordaindice card3 centro borda">
-                    <p id="titulob">Crescimento</p>
-                    <p id="resultado"><?php echo $crescimento; ?></p>
-                    <p id="indice">Crescimento nos ultimos 30 dias</p>
+                        <p id="titulob">Lucro</p>
+                        <p id="resultado"><?php echo $lucro; ?></p>
+                        <p id="indice">Crescimento nos últimos 30 dias</p>
+                    </div>
+                    <div class="col-md-2  mx-auto bordaindice card3 centro borda">
+                        <p id="titulob">Crescimento</p>
+                        <p id="resultado"><?php echo $crescimento; ?></p>
+                        <p id="indice">Crescimento nos ultimos 30 dias</p>
+                    </div>
                 </div>
             </div>
-        </div>
         </div><br>
+        <div class="container">
         <div class="row">
             <div class="col-md-6 menu">
-                <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                <p class="centro">Crescimento anual</p>
+                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
                 <script>
-                    var xValues = ["2018", "2019", "2020", "2020", "2021"];
-                    var yValues = [55, 49, 44, 24, 15];
+                    var xValues = ["2018", "2019", "2020", "2021", "2022"];
+                    var yValues = [15, 25, 38, 44, 55];
                     var barColors = [
-                        "#b91d47",
-                        "#00aba9",
-                        "#2b5797",
-                        "#e8c3b9",
-                        "#1e7145"
+                        "rgba(255,0,0,1.0)",
+                        "rgba(255,0,0,0.8)",
+                        "rgba(255,0,0,0.6)",
+                        "rgba(255,0,0,0.4)",
+                        "rgba(255,0,0,0.2)"
                     ];
+
                     new Chart("myChart", {
-                        type: "pie",
+                        type: "bar",
                         data: {
                             labels: xValues,
                             datasets: [{
@@ -92,19 +100,27 @@ if (mysqli_num_rows($query)) { while ($array = mysqli_fetch_row($query)) { $coun
                             }]
                         },
                         options: {
-                            title: {
-                                display: true,
-                                text: "Controle de vendas"
+                            legend: {
+                                display: false
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }],
                             }
                         }
                     });
                 </script>
+
             </div>
-            <div class="col-md-6 ">
+            <div class="col-md-6">
                 <canvas id="myChart1" style="width:100%;max-width:700px"></canvas>
                 <script>
-                    var xValues = ["2015", "2016", "2017", "2018", "2019"];
-                    var yValues = [55, 49, 44, 24, 15];
+                    
+                    var xValues = ["Seg", "Ter", "Qua", "Qui", "sex"];
+                    var yValues = [0, 49, 44, 24, 15];
                     var barColors = [
                         "#b91d47",
                         "#00aba9",
@@ -114,7 +130,7 @@ if (mysqli_num_rows($query)) { while ($array = mysqli_fetch_row($query)) { $coun
                     ];
 
                     new Chart("myChart1", {
-                        type: "doughnut",
+                        type: "line",
                         data: {
                             labels: xValues,
                             datasets: [{
@@ -125,20 +141,95 @@ if (mysqli_num_rows($query)) { while ($array = mysqli_fetch_row($query)) { $coun
                         options: {
                             title: {
                                 display: true,
-                                text: "Controle de produção"
+                                text: "Faturamenta semanal"
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div>
+    </section>
+
+    <aside>
+    <div class="col">
+            <div class="col-md-6 menu">
+                <p class="centro">Crescimento anual</p>
+                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                <script>
+                    var xValues = ["2018", "2019", "2020", "2021", "2022"];
+                    var yValues = [15, 25, 38, 44, 55];
+                    var barColors = [
+                        "rgba(255,0,0,1.0)",
+                        "rgba(255,0,0,0.8)",
+                        "rgba(255,0,0,0.6)",
+                        "rgba(255,0,0,0.4)",
+                        "rgba(255,0,0,0.2)"
+                    ];
+
+                    new Chart("myChart", {
+                        type: "Donut",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: barColors,
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }],
                             }
                         }
                     });
                 </script>
 
             </div>
-        </div>
+            <div class="col-md-6">
+                <canvas id="myChart1" style="width:100%;max-width:700px"></canvas>
+                <script>
+                    
+                    var xValues = ["Seg", "Ter", "Qua", "Qui", "sex"];
+                    var yValues = [0, 49, 44, 24, 15];
+                    var barColors = [
+                        "#b91d47",
+                        "#00aba9",
+                        "#2b5797",
+                        "#e8c3b9",
+                        "#1e7145"
+                    ];
 
-        </div>
+                    new Chart("myChart1", {
+                        type: "line",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: barColors,
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: "Faturamenta semanal"
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>         
 
-        </div>
-        <div>
-    </section>
+    </aside>
 </body>
 
 </html>

@@ -88,7 +88,7 @@ $resposta = $db->validar();
   </header>
   <section>
     <div class="container">
-      <iframe class="#topo" id="telas" src="dashbord.php"></iframe>
+      <iframe class="#topo" id="telas" src="tela.php"></iframe>
     </div>
   </section>
   <footer class="container">
