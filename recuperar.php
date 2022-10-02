@@ -1,21 +1,87 @@
+<?php
+session_start();
+//conexão a classes
+require('./class/class.site.php');
+// Instância da classe
+$db = new site;
+//variaveis
+$mensagem = "";
+$email = "";
+$id = 0;
+?>
 <!DOCTYPE html>
 <html lang="pt=br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>-->
     <link rel="icon" type="image/x-icon" href="/img/favico.ico">
-    <title>main</title>
+    <link rel="stylesheet" href="css/pages.css">
+    <script src="js/script.js"></script>
+    <script language="javascript" src="js/funcoes.js"></script>
+    <link rel="icon" type="image/x-icon" href="/img/favico.ico">
+    <title>recuperar senha</title>
 </head>
-<body>
-    <div class="container">
-    <h1 class="alert alert-success titulo">Recuperar senha</h1>
-    </div>
+
+<body style="background-color:#2E2E2E;">
+    <header class="container">
+        <div class="mt-md-1">
+            <div class="row ajuste">
+                <h1 class="alert alert-success titulo centro borda fontebranca">Recuperar conta</h1>
+                <form method="post" id="recuperar" action="" oninput="">
+                    <fieldset id="recuperar">
+                        <legend class='fontebranca'>Recuperar</legend>
+                        <p><input type="email" class="bordasimples" name="tmail" id="cmail" size="20" maxlength="40" placeholder="digite o e-mail">
+                            <input type="submit" class="" id="crecuperar" name="trecuperar" value="enviar">
+                        </p>
+                    </fieldset>
+                    <?php
+                    if (isset($_POST['trecuperar'])) {
+                        $email = $_POST['tmail'];
+                        $data = date('d-m-Y');
+                        if (empty($email) || empty($email)) {
+                            echo "<script>alert('Falta informações para enviar o código!')</script>";
+                        } elseif ($email <> "") {
+                            require("./conectar.php");
+                            $query = mysqli_query($conn, "SELECT * FROM usuarios WHERE email='$email'");
+                            if (mysqli_num_rows($query)) {
+                                     while ($array = mysqli_fetch_row($query)) {
+                                    $id = $array[0];
+                                    }
+                                }
+                                $comando = "SELECT * FROM recuperar WHERE id='$id' and dt = '$data' ";
+                                $query = mysqli_query($conn, $comando);
+                                if (mysqli_num_rows($query)) {
+                                    while ($array = mysqli_fetch_row($query)) {
+                                        $mensagem = $array[1];
+                                        $resposta = $db->EnviarMail($mensagem, $email);
+                                    }
+                                } else {
+                                    $caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                                    $max = strlen($caracteres) - 1;
+                                    $code = "";
+                                    for ($i = 0; $i < 5; $i++) {
+                                        $code .= $caracteres[mt_rand(0, $max)];
+                                    }
+                                    $mensagem = $code;
+                                    $resposta = $db->gravacode($id, $data, $code);
+                                    $resposta = $db->EnviarMail($mensagem, $email);
+                                }
+                            } else {
+                                echo "<script>alert('Não existe código valido para esse usuário!')</script>";
+                            }
+                        } else {
+                            echo "<script>alert('Este email não existe no banco de dados!')</script>";
+                        }
+
+                    ?>
+                </form>
+            </div>
+        </div>
+    </header>
 </body>
+
 </html>

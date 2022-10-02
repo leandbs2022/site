@@ -180,7 +180,6 @@ $permissao = $_SESSION["perfil"];
                         $dt_cad = date('d-m-Y');
                         $resposta = $db->cliente_add($nome, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad);
                     }
-
                     if (isset($_POST['talterar'])) {
                         if ($permissao == "1") {
                             $tgenero = $_POST['tgenero'];
@@ -194,7 +193,7 @@ $permissao = $_SESSION["perfil"];
                                 default:
 
                                     break;
-                            }
+                    }
                             $nome =  $_POST['tnome'];
                             $tel = $_POST['ttel'];
                             $cel = $_POST['tcel'];

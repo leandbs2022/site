@@ -1,5 +1,5 @@
 
-function alerta(){
+function recuperar(){
   /* if(document.getElementById("cPadrao").checked == true){ let valor = "1"
    ['<? =$selecionado= ?>'] = valor
 }
@@ -9,10 +9,7 @@ function alerta(){
    if(document.getElementById("cadmin").checked == true){let valor = "3"
 
 }*/
-
-let result = confirm("Deseja relamente deleta")
-alert(result)
-
+window.Location.href('recuperar.php')
  }
 
 

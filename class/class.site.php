@@ -1,4 +1,9 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class site //classe - Funcões
 {
     //////////////////////////////////////////////Login de entrada//////////////////////////////////////////////////
@@ -110,7 +115,7 @@ class site //classe - Funcões
                     if ($deletar == true) {
                         $query = mysqli_query($conn, "DELETE FROM `usuarios` WHERE id='$id'");
                         echo "<script>alert('o usuário deletado com sucesso!')</script>";
-                    }else{
+                    } else {
                         echo "<script>alert('Operação cancelada!')</script>";
                     }
                 } else {
@@ -127,7 +132,7 @@ class site //classe - Funcões
         require("./conectar.php");
         $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
         if (mysqli_num_rows($query)) {
-           /* $estilos[0] = "background-color: #e3f2fd;font-size:18px;color:black;font-style:bold;font-family:Arial;
+            /* $estilos[0] = "background-color: #e3f2fd;font-size:18px;color:black;font-style:bold;font-family:Arial;
       text-align: center; width:auto;";
             echo "<table style=\"width: auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
       <td style=\"$estilos[0]\">Usuário</td>
@@ -135,7 +140,7 @@ class site //classe - Funcões
       <td style=\"$estilos[0]\">E-mail</td>";*/
             while ($array = mysqli_fetch_row($query)) {
 
-               /* $estilos[1] = "background-color: white;font-size:16px;color:black;
+                /* $estilos[1] = "background-color: white;font-size:16px;color:black;
                 font-style:bold;font-family: Times New Roman, Times, serif;
                 text-align: center;width: 75%;";
 
@@ -197,8 +202,8 @@ class site //classe - Funcões
             echo "<script>alert('o usuário alterado com sucesso!')</script>";
         }
     }
-    
-    function cliente_del($nome,$deletar)
+
+    function cliente_del($nome, $deletar)
     {
         if (empty($nome)) {
             echo "<script>alert('Faça uma busca do cliente a ser deletado depois click em deletar!')</script>";
@@ -213,7 +218,7 @@ class site //classe - Funcões
                     if ($deletar === true) {
                         $query = mysqli_query($conn, "DELETE FROM `usuarios` WHERE id='$id'");
                         echo "<script>alert('o cliente deletado com sucesso!')</script>";
-                    }else{
+                    } else {
                         echo "<script>alert('Operação cancelada!')</script>";
                     }
                 } else {
@@ -221,9 +226,9 @@ class site //classe - Funcões
                     echo "<script>alert('Verificar se cliente que deseja deleta realmente existe!')</script>";
                 }
             }
-        }  
+        }
     }
-   
+
     //Cadastro de funcionario
     function funcionario_add_alt()
     {
@@ -293,4 +298,46 @@ class site //classe - Funcões
         $result =  $visitas = number_format("$visitante", 0, "", ".");
         echo "<h6>Você é o visitante número: {$result}</6>";
     }
+function gravacode($id,$data,$code){
+require("./conectar.php");
+$query = mysqli_query($conn, "INSERT INTO `recuperar`(`id`, `code`, `dt`, `valido`) VALUES ('$id','$code','$data','1')")or die(mysqli_error($conn));;
+
+
+}
+function EnviarMail($mensagem,$email)
+{
+    require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+    require 'vendor/phpmailer/phpmailer/src/Exception.php';
+    require 'vendor/autoload.php';
+    $mail = new PHPMailer(true);
+    try {
+
+        // Configurações do servidor
+        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $mail->isSMTP();        //Devine o uso de SMTP no envio
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPAuth = true; //Habilita a autenticação SMTP
+        $mail->Username   = 'leandro.b.souza@df.estudante.senai.br';
+        $mail->Password   = '';
+        // Criptografia do envio SSL também é aceito
+        $mail->SMTPSecure = 'SSL';
+        // Define o remetente
+        $mail->setFrom('leandro.b.souza@df.estudante.senai.br');
+        // Define o destinatário
+        $mail->addAddress($email);
+        // Conteúdo da mensagem
+        $mail->isHTML(true);  // Seta o formato do e-mail para aceitar conteúdo HTML
+        $mail->Subject = 'recuperar conta';
+        $mail->Body    = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body> <h1>Código de recuperação<h1>' . $mensagem . '</body></html>';
+        $mail->AltBody = 'Código: ' . $mensagem;
+        // Enviar
+        $mail->send();
+        echo "<h6 class='alert alert-success'> A mensagem foi enviada para {$email} com sucesso!</h6>";
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+    echo "<script>alert('Código enviado para seu email')</script>";
+}
 }

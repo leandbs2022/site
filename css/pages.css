@@ -80,9 +80,7 @@ height: 100vh;
 
 .centro {
     text-align: center;
-
-
-
+    justify-items: center;
 }
 
 .direita {
