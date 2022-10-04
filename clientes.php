@@ -20,6 +20,9 @@ $dt_cad = "";
 $casa = "";
 $complemento = "";
 $id = 0;
+$cod = 0;
+$sobre = "";
+$op = '0';
 //perfil de acesso
 $permissao = $_SESSION["perfil"];
 ?>
@@ -36,57 +39,108 @@ $permissao = $_SESSION["perfil"];
     <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" type="text/css" href="css/form.css" />
     <script src="js/script.js"></script>
-    <script language="javascript" src="js/funcoes.js"></script>
+    <script src="js/funcoes.js"></script>
     <title>cadastro de Clientes</title>
 </head>
 
-<body>
+<body onload="botao()">
     <header class="container">
         <div class="mt-md-1">
             <div class="row ajuste">
                 <h1 class="alert alert-primary titulo centro borda fontebranca">Clientes</h1>
-                <form method="post" id="fcontato" action="" oninput="cal_total();">
+                <form method="post" id="fcontato" action="" oninput="cal_total()" onload="">
                     <hgroup>
                         <h1 class="centro fontebranca">Formulário de cliente</h1>
                         <?php
-                        if (isset($_POST['tlocaliza'])) {
-                            $nome = $_POST['tloc'];
-                            require("./conectar.php");
-                            $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE nome='$nome'");
-                            if (mysqli_num_rows($query)) {
+                        if (isset($_POST['timpressaoexcel'])) {
+                            $nome =  $_POST['tnome'];
+                            $seleciona = $_POST['tcliente'];
+                            echo "<script>alert('$seleciona')</script>";
+                            switch ($seleciona) {
+                                case '1':
+                                    $pes = 'Todos';
+                                    $_SESSION['impressão'] = $_POST['tnome'];
+                                    $_SESSION['op'] = $pes;
+                                    header("Location:impressao_impr.php");
+                                    break;
+                                case '2':
+                                    $pes = 'Individual';
+                                    if ($pes == "Individual") {
+                                        if (empty($nome)) {
+                                            echo "<script>alert('Faça uma busca do cliente a ser gerado relatorório!')</script>";
+                                        } else {
 
-                                while ($array = mysqli_fetch_row($query)) {
-                                    $id = $array[0];
-                                    $nome = $array[1];
-                                    $tel = $array[6];
-                                    $cel = $array[7];
-                                    $email = $array[9];
-                                    $obs = $array[12];
-                                    $tgenero = $array[8];
-                                    $endereco = $array[2];
-                                    $cep = $array[5];
-                                    $estado = $array[3];
-                                    $cidade = $array[4];
-                                    $dt_nasc = $array[10];
-                                    $dt_cad = $array[11];
-                                    $casa = $array[13];
-                                    $complemento = $array[14];
-                                }
-                            } else {
-                                echo "<script>alert('Niguém encontrado com esse nome!')</script>";
+                                            $_SESSION['impressão'] = $_POST['tnome'];
+                                            $_SESSION['op'] = $pes;
+                                            header("Location:impressao_impr.php");
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    break;
                             }
                         }
 
+
+                        if (isset($_POST['timpressaopdf'])) {
+                            $nome =  $_POST['tnome'];
+
+                            echo "<script>alert('Recurso em desenvolvimento!')</script>";
+                            /*if (empty($nome)) {
+                                echo "<script>alert('Faça uma busca do cliente a ser gerado relatorório!')</script>";
+                            } else {
+
+                                $_SESSION['impressão'] = $_POST['tnome'];
+                                $_SESSION['op'] = $op;
+                                header("Location:impressao_impr2.php");     
+                            }*/
+                        }
+
+
+                        if (isset($_POST['tlocaliza'])) {
+
+                            $nome = $_POST['tloc'];
+                            if (empty($nome)) {
+                            } else {
+
+                                require("./conectar.php");
+                                $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE nome ='$nome'");
+                                if (mysqli_num_rows($query)) {
+
+                                    while ($array = mysqli_fetch_row($query)) {
+                                        $id = $array[0];
+                                        $nome = $array[1];
+                                        $sobre =  $array[2];
+                                        $endereco = $array[3];
+                                        $estado = $array[4];
+                                        $cidade = $array[5];
+                                        $cep = $array[6];
+                                        $tel = $array[7];
+                                        $cel = $array[8];
+                                        $tgenero = $array[9];
+                                        $email = $array[10];
+                                        $dt_nasc = $array[11];
+                                        $dt_cad = $array[12];
+                                        $obs = $array[13];
+                                        $casa = $array[14];
+                                        $complemento = $array[15];
+                                    }
+                                } else {
+                                    echo "<script>alert('Niguém encontrado com esse nome!')</script>";
+                                }
+                            }
+                        }
                         ?>
                     </hgroup>
 
                     <fieldset id="cliente">
                         <legend id="legenda">Identificação do Cliente</legend>
                         <p class="fontebranca">ID:<?php echo $id; ?></p>
-                        <p><label class="fontebranca" for="cnome">Nome:</label><input type="text" class="bordasimples espaco " value="<?php echo $nome; ?>" name="tnome" id="cnome" size="20" maxlength="40" placeholder="nome completo"></p>
+                        <p><label class="fontebranca" for="cnome">Nome:</label><input type="text" class="bordasimples espaco " value="<?php echo $nome; ?>" name="tnome" id="cnome" size="20" maxlength="40" placeholder="Nome"><span class="titulored"> Obrigatório</span></p>
+                        <p><label class="fontebranca" for="cnome">Sobrenome:</label><input type="text" class="bordasimples espaco " value="<?php echo $sobre; ?>" name="tsobre" id="csobre" size="20" maxlength="40" placeholder="Sobrenome"><span class="titulored"> Obrigatório</span></p>
                         <p><label class="fontebranca" for="ctel">Tel:</label><input type="text" class="bordasimples" value="<?php echo $tel; ?>" name="ttel" id="ctel" size="11" maxlength="11" placeholder="Telefone"></p>
                         <p><label class="fontebranca" for="ccel"> Cel:</label><input type="text" class="bordasimples" value="<?php echo $cel; ?>" name="tcel" id="ccel" size="11" maxlength="11" placeholder="Celular"></p>
-                        <p><label class="fontebranca" for="cemail">E-mail:</label>&nbsp;<input type="email" value="<?php echo $email; ?>" name="tmail" id="cmail" class="bordasimples" size="20" maxlength="40" placeholder="e-mail"></p>
+                        <p><label class="fontebranca" for="cemail">E-mail:</label>&nbsp;<input type="email" value="<?php echo $email; ?>" name="tmail" id="cmail" class="bordasimples" size="20" maxlength="40" placeholder="e-mail"><span class="titulored"> Obrigatório</span></p>
                         <p><label class="fontebranca" for="cobs">OBS:</label><input type="text" class="bordasimples" value="<?php echo $obs; ?>" name="tobs" id="cobs" size="80" maxlength="80"></p>
                         <fieldset id="sexo" class="bordasimples">
                             <legend>Dados pessoais</legend>
@@ -103,19 +157,20 @@ $permissao = $_SESSION["perfil"];
                     </fieldset>
                     <fieldset id="endereco">
                         <legend>Endereço do Cliente</legend>
-                        <p><label class="fontebranca" for="ccep">Cep:</label><input type="text" value="<?php echo $cep; ?>" class="bordasimples" name="tcep" id="ccep" size="12" maxlength="12" placeholder="cep"></p>
-                        <p><label class="fontebranca" for="crua">Log.:</label><input type="text" value="<?php echo $endereco; ?>" class="bordasimples" name="trua" id="crua" size="40" maxlength="80" placeholder="endereço"></p>
-                        <p><label class="fontebranca" for="cnum">Nº:</label><input class="bordasimples" value="<?php echo $casa; ?>" type="number" name="tnum" id="cnum" mix="0" max="999" placeholder="">
-                        <p><label class="fontebranca" for="ccom">Complemento:</label><input class="bordasimples" type="text" value="<?php echo $complemento; ?>" name="tcom" id="ccom" placeholder="">
-                        </p>
+                        <p><label class="fontebranca" for="ccep">Cep:</label><input type="text" value="<?php echo $cep; ?>" class="bordasimples" name="tcep" id="ccep" size="12" maxlength="12" placeholder="cep"></i></p>
+                        <p><label class="fontebranca" for="crua">Log.:</label><input type="text" value="<?php echo $endereco; ?>" class="bordasimples" name="trua" id="crua" size="40" maxlength="80" placeholder="endereço"><span class="titulored"> Obrigatório</span></p>
+                        <p><label class="fontebranca" for="cnum">Nº:</label><input class="bordasimples" value="<?php echo $casa; ?>" type="number" name="tnum" id="cnum" mix="0" max="999" placeholder=""> <span class="titulored"> Obrigatório</span></p>
+                        <p><label class="fontebranca" for="ccom">Complemento:</label><input class="bordasimples" type="text" value="<?php echo $complemento; ?>" name="tcom" id="ccom" placeholder=""><span class="titulored"> Obrigatório</span></p>
                         <p><label for="cest" class="fontebranca">Estado:</label>
                             <select class="bordasimples bordaT" name="test" id="cest">
                                 <option><?php echo $estado; ?></option>
                                 <option value="DF">DF</option>
                             </select>
+                            <span class="titulored"> Obrigatório</span>
                         </p>
                         <p><label class="fontebranca" for="ccid">Cidade:</label>
                             <input type="text" class="bordasimples bordaT" name="tcid" id="ccid" maxlength="40" size="20" value="<?php echo $cidade; ?>" placeholder="cidade" list="cidade" />
+                            <span class="titulored"> Obrigatório</span>
                         </p>
                         <datalist id="cidade">
                             <option value="Brasilia"></option>
@@ -133,24 +188,41 @@ $permissao = $_SESSION["perfil"];
                         <p><input type="submit" class="button" id="ccadastro" name="tcadastro" value="Novo"> |
                             <input type="submit" class="button" id="calterar" name="talterar" value="Alterar"> |
                             <input type="submit" class="button" id="cdel" name="tdel" value="Deletar">|
-                            <input type="submit" class="button #legenda" id="clocaliza" name="tlocaliza" value="pesquisar" >
+                            <input type="submit" class="button #legenda" id="clocaliza" name="tlocaliza" value="pesquisar">
                             <img class="imgdireita" src="img/dedodireita.svg"><select id="cloc" name="tloc" class="bordaT">
                                 <?php
+
                                 require("./conectar.php");
                                 $query = mysqli_query($conn, "SELECT * from clientes where 1");
                                 if (mysqli_num_rows($query)) {
                                     while ($array1 = mysqli_fetch_row($query)) {
-                                        $direto = $array1[1];
-                                        echo "<option>{$direto}</option>";
+                                        $cliente = $array1[1];
+                                        echo "<option>{$cliente}</option>";
                                     }
                                 }
-
                                 ?>
                             </select>
                         </p>
                     </fieldset>
-
+                    <fieldset>
+                        <legend>Impressão</legend>
+                        <div class=" mt-md-2">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select id="ccliente" name="tcliente" class="bordaT">
+                                        <option>Todos</option>
+                                        <option>Individual</option>
+                                    </select>
+                                </div><br>
+                                <div class="col-md-3">
+                                    <input type="submit" id="cimpressaoexcel" name="timpressaoexcel" class="button" value="Excel"> | <input type="submit" src="img/pdf.png" id="cimpressaopdf" name="timpressaopdf" class="button" value="PDF">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
                     <?php
+
+
 
                     if (isset($_POST['tcadastro'])) {
                         $tgenero = $_POST['tgenero'];
@@ -166,6 +238,7 @@ $permissao = $_SESSION["perfil"];
                                 break;
                         }
                         $nome =  $_POST['tnome'];
+                        $sobre =  $_POST['tsobre'];
                         $tel = $_POST['ttel'];
                         $cel = $_POST['tcel'];
                         $email = $_POST['tmail'];
@@ -178,7 +251,16 @@ $permissao = $_SESSION["perfil"];
                         $cidade = $_POST['tcid'];
                         $dt_nasc = $_POST['tnasc'];
                         $dt_cad = date('d-m-Y');
-                        $resposta = $db->cliente_add($nome, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad);
+
+
+                        if (
+                            empty($nome) || empty($email) || empty($endereco) || empty($casa) || empty($complemento) ||
+                            empty($estado) || empty($cidade)
+                        ) {
+                            echo "<script>alert('Falta preencher algumas informações obrigatórias!')</script>";
+                        } else {
+                            $resposta = $db->cliente_add($nome, $sobre, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad);
+                        }
                     }
                     if (isset($_POST['talterar'])) {
                         if ($permissao == "1") {
@@ -193,8 +275,9 @@ $permissao = $_SESSION["perfil"];
                                 default:
 
                                     break;
-                    }
+                            }
                             $nome =  $_POST['tnome'];
+                            $sobre =  $_POST['tsobre'];
                             $tel = $_POST['ttel'];
                             $cel = $_POST['tcel'];
                             $email = $_POST['tmail'];
@@ -207,23 +290,26 @@ $permissao = $_SESSION["perfil"];
                             $cidade = $_POST['tcid'];
                             $dt_nasc = $_POST['tnasc'];
                             $dt_cad = date('d-m-Y');
-                            $resposta = $db->cliente_alt($nome, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad);
+
+                            if (
+                                empty($nome) || empty($sobre) || empty($email) || empty($endereco) || empty($casa) || empty($complemento) ||
+                                empty($estado) || empty($cidade)
+                            ) {
+                                echo "<script>alert('Falta preencher algumas informações que são obrigatórias!')</script>";
+                            } else {
+                                $resposta = $db->cliente_alt($nome, $sobre, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad);
+                            }
                         } else {
                             echo "<script>alert('Você não tem permissão para essa função.')</script>";
                         }
                     }
                     if (isset($_POST['tdel'])) {
+
+                        $nome =  $_POST['tnome'];
                         if ($permissao == "1") {
-                            echo "<script>let result = confirm('Deseja relamente deleta? Não será possivel recuperar os dados.')</script>";
-                            $deletar = "<script>document.write(result)</script>";
-                            $nome = $_POST['tnome'];
-                            if ($permissao == "1") {
-                                $resposta = $db->cliente_del($nome, $deletar);
-                            } else {
-                                echo "<script>alert('Você não tem permissão para deleta cliente.')</script>";
-                            }
+                            $resposta = $db->cliente_del($nome);
                         } else {
-                            echo "<script>alert('Você não tem permissão para essa função.')</script>";
+                            echo "<script>alert('Você não tem permissão para deleta cliente.')</script>";
                         }
                     }
                     ?>

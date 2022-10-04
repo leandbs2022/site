@@ -19,6 +19,8 @@ $_SESSION['nivel'] = "";
 $_SESSION["nome_l"] = "";
 $_SESSION['email_l'] = "";
 
+$_SESSION['op'] = "";
+$_SESSION["impressão"] = "";
 //Variaveis
 $nome = "";
 $senha = "";

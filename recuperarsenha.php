@@ -3,9 +3,10 @@ session_start();
 //conexão a classes
 require('./class/class.site.php');
 $db = new site;
-$resposta = $db->validar();
 //variaveis
-
+$confirme = "";
+$senha= "";
+$code= "";
 ?>
 <!DOCTYPE html>
 <html lang="pt=br">
@@ -30,10 +31,22 @@ $resposta = $db->validar();
                 <form method="post" id="recuperar" action="" oninput="">
                 <fieldset id="cliente">
                     <legend class='fontebranca'>Recuperar</legend>
-                    <p><label class='fontebranca'>Código:</label><input type="number" class="bordasimples" name="tcod" id="ccod" size="20" maxlength="20"></p>
-                    <p><label class='fontebranca'>Senha:</label><input type="password" class="bordasimples" name="tsenha" id="csenha" value="" size="8" maxlength="8"><input type="password" class="bordasimples" name="tconfimr" id="tconfirme" size="8" maxlength="8" placeholder="Confirme"></p>
-                    <p><input type="submit" class="button" id="crecuperar" name="trecuperar" value="Enviar"> |
+                    <p><label class='fontebranca'>Código:</label><input type="text" class="bordasimples" name="tcod" id="ccod" size="5" maxlength="5" placeholder="code"></p>
+                    <p><label class='fontebranca'>Senha:</label><input type="password" class="bordasimples" name="tsenha" id="csenha" value="" size="8" maxlength="8" placeholder="senha"><input type="password" class="bordasimples" name="tconfime" id="tconfirme" size="8" maxlength="8" placeholder="Confirme"></p>
+                    <p><input type="submit" class="button" id="crecuperar" name="trecuperar" value="Enviar"> </p>
                 </fieldset>
+                <?php 
+                 if (isset($_POST['trecuperar'])) {
+                    $senha = $_POST['tsenha'];
+                    $confirme = $_POST['tconfime'];
+                    $code=$_POST['tcod'];
+                    if(empty($code)){
+                        echo "<script>alert('Digite o Código!')</script>";
+                    }else{
+                    $resposta = $db->alterar_senha($senha,$code,$confirme);
+                    }
+                }
+                ?>
                 </form>
             </div>
         </div>

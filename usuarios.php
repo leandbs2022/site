@@ -10,7 +10,7 @@ $senha = "";
 $perfil = "";
 $email = "";
 $perfil = "";
-$desabilite = "disabled";
+$deletar = false;
 $permissao = $_SESSION["perfil"];
 ?>
 <!DOCTYPE html>
@@ -42,7 +42,7 @@ $permissao = $_SESSION["perfil"];
 
     ?>
     <header class="container">
-   
+
         <div class="mt-md-1">
             <div class="row ajuste">
                 <h1 class="alert alert-primary titulo centro borda fontebranca">Usuários</h1>
@@ -127,7 +127,7 @@ $permissao = $_SESSION["perfil"];
                         $confime = $_POST['tconfimr'];
                         $email = $_POST['tmail'];
 
-                        if ($permissao == "1") {
+                        if ($permissao === "1") {
                             if ($senha <> $confime) {
                                 echo "<script>alert('A Senha não confere!Favor digite novamente.')</script>";
                             } else {
@@ -139,20 +139,12 @@ $permissao = $_SESSION["perfil"];
                     }
 
                     if (isset($_POST['tdel'])) {
-                       
-                        if ($permissao == "1") {
-                            echo "<script>let result = confirm('Deseja relamente deleta? Não será possivel recuperar os dados.')</script>";
-                            $deletar = "<script>document.write(result)</script>";
+                        if ($permissao == 1) {
                             $nome = $_POST['tnome'];
-                            if ($permissao == "1") {
-                                $resposta = $db->usuario_del($nome, $deletar);
-                            } else {
-                                echo "<script>alert('Você não tem permissão de adicionar usuário.')</script>";
-                            }
+                            $resposta = $db->usuario_del($nome);
                         } else {
-                            echo "<script>alert('Você não tem permissão para essa função.')</script>";
+                        echo "<script>alert('Você não tem permissão para essa função.')</script>";
                         }
-                       
                     }
 
                     ?>

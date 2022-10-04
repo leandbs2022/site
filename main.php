@@ -78,7 +78,7 @@ $resposta = $db->validar();
                   <a class="nav-link disabled">Gerador de vendas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="relatorios.php" target="_black">Relatórios</a>
+                  <a class="nav-link disabled" href="relatorios.php" target="_black">Relatórios</a>
                 </li>
               </ul>
             </div>

@@ -77,9 +77,6 @@ class site //classe - Funcões
     //alterar usuarios
     function usuario_alt($nome, $senha, $perfil, $email)
     {
-        echo $senha;
-
-
         if (empty($nome)) {
             echo "<script>alert('Faça uma busca do usuário a ser alterado depois click em alterar!')</script>";
         } else {
@@ -99,29 +96,21 @@ class site //classe - Funcões
         }
     }
     //deleta usuarios
-    function usuario_del($nome, $deletar)
+    function usuario_del($nome)
     {
-
         if (empty($nome)) {
             echo "<script>alert('Faça uma busca do usuário a ser deletado depois click em deletar!')</script>";
         } else {
-            if ($deletar == true) {
-                require("./conectar.php");
-                $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
-                if (mysqli_num_rows($query)) {
-                    while ($array = mysqli_fetch_row($query)) {
-                        $id = $array[0];
-                    }
-                    if ($deletar == true) {
-                        $query = mysqli_query($conn, "DELETE FROM `usuarios` WHERE id='$id'");
-                        echo "<script>alert('o usuário deletado com sucesso!')</script>";
-                    } else {
-                        echo "<script>alert('Operação cancelada!')</script>";
-                    }
-                } else {
-
-                    echo "<script>alert('Verificar se usuário que deseja deleta realmente existe!')</script>";
+            require("./conectar.php");
+            $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+            if (mysqli_num_rows($query)) {
+                while ($array = mysqli_fetch_row($query)) {
+                    $id = $array[0];
                 }
+                $query = mysqli_query($conn, "DELETE FROM `usuarios` WHERE id='$id'");
+                echo "<script>alert('o usuário deletado com sucesso!')</script>";
+            } else {
+                echo "<script>alert('Verificar se usuário que deseja deleta realmente existe!')</script>";
             }
         }
     }
@@ -163,7 +152,7 @@ class site //classe - Funcões
     }
 
     ///////////////////////////////////////////////////Cadastro de clientes///////////////////////////////////////////////////
-    function cliente_add($nome, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad)
+    function cliente_add($nome, $sobre,$tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad)
     {
         require("./conectar.php");
         $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE email='$email'");
@@ -172,6 +161,7 @@ class site //classe - Funcões
         } else {
 
             $nome =   ucwords($nome);
+            $sobre =   ucwords($sobre);
             $obs =  ucwords($obs);
             $tgenero =  ucwords($tgenero);
             $endereco = strtoupper($endereco);
@@ -179,17 +169,19 @@ class site //classe - Funcões
             $cidade =  ucwords($cidade);
             $complemento =  ucwords($complemento);
 
-            $query = mysqli_query($conn, "INSERT INTO `clientes`(`nome`, `endereco`, `estado`, `cidade`, `cep`, `tel`, `cel`, `sexo`, `email`, `data_nasc`, `data`, `obs`,`lote`,`comple`) 
-            VALUES ('$nome','$endereco','$estado','$cidade','$cep','$tel','$cel','$tgenero','$email','$dt_nasc','$dt_cad','$obs','$casa','$complemento')") or die(mysqli_error($conn));
+            $query = mysqli_query($conn, "INSERT INTO `clientes`(`nome`,`sobre`, `endereco`, `estado`, `cidade`, `cep`, `tel`, `cel`, `sexo`, `email`, `data_nasc`, `data`, `obs`,`lote`,`comple`) 
+            VALUES ('$nome','$sobre','$endereco','$estado','$cidade','$cep','$tel','$cel','$tgenero','$email','$dt_nasc','$dt_cad','$obs','$casa','$complemento')") or die(mysqli_error($conn));
             echo "<script>alert('o usuário criado com sucesso!')</script>";
         }
     }
-    function cliente_alt($nome, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad)
+    function cliente_alt($nome,$sobre,$tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad)
     {
         require("./conectar.php");
         $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE email='$email'");
         if (mysqli_num_rows($query)) {
+
             $nome =   ucwords($nome);
+            $sobre =   ucwords($sobre);
             $obs =  ucwords($obs);
             $tgenero =  ucwords($tgenero);
             $endereco = strtoupper($endereco);
@@ -197,35 +189,35 @@ class site //classe - Funcões
             $cidade =  ucwords($cidade);
             $complemento =  ucwords($complemento);
 
-            $query = mysqli_query($conn, "UPDATE `clientes` SET `nome`='$nome',`endereco`='$endereco',`estado`='$estado',`cidade`='$cidade',`cep`='$cep',`tel`='$tel',`cel`='$cel',`sexo`='$tgenero',`email`='$email',`data_nasc`='$dt_nasc',`data`='$dt_cad',
+            $query = mysqli_query($conn, "UPDATE `clientes` SET `nome`='$nome',`sobre`='$sobre',`endereco`='$endereco',`estado`='$estado',`cidade`='$cidade',`cep`='$cep',`tel`='$tel',`cel`='$cel',`sexo`='$tgenero',`email`='$email',`data_nasc`='$dt_nasc',`data`='$dt_cad',
             `obs`='$obs',`lote`='$casa',`comple`='$complemento' WHERE 1") or die(mysqli_error($conn));
             echo "<script>alert('o usuário alterado com sucesso!')</script>";
+        }else{
+
+            echo "<script>alert('o usuário não encontrado!')</script>";
         }
     }
 
-    function cliente_del($nome, $deletar)
+    function cliente_del($nome)
     {
         if (empty($nome)) {
             echo "<script>alert('Faça uma busca do cliente a ser deletado depois click em deletar!')</script>";
         } else {
-            if ($deletar == true) {
                 require("./conectar.php");
+
                 $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE nome='$nome'");
                 if (mysqli_num_rows($query)) {
                     while ($array = mysqli_fetch_row($query)) {
                         $id = $array[0];
                     }
-                    if ($deletar === true) {
-                        $query = mysqli_query($conn, "DELETE FROM `usuarios` WHERE id='$id'");
+                    echo "teste";
+                    $query  = mysqli_query($conn, "DELETE FROM `clientes` WHERE id_clientes='$id'") or die(mysqli_error($conn));
                         echo "<script>alert('o cliente deletado com sucesso!')</script>";
-                    } else {
-                        echo "<script>alert('Operação cancelada!')</script>";
-                    }
+                   
                 } else {
 
                     echo "<script>alert('Verificar se cliente que deseja deleta realmente existe!')</script>";
                 }
-            }
         }
     }
 
@@ -298,46 +290,195 @@ class site //classe - Funcões
         $result =  $visitas = number_format("$visitante", 0, "", ".");
         echo "<h6>Você é o visitante número: {$result}</6>";
     }
-function gravacode($id,$data,$code){
-require("./conectar.php");
-$query = mysqli_query($conn, "INSERT INTO `recuperar`(`id`, `code`, `dt`, `valido`) VALUES ('$id','$code','$data','1')")or die(mysqli_error($conn));;
 
-
-}
-function EnviarMail($mensagem,$email)
-{
-    require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
-    require 'vendor/phpmailer/phpmailer/src/SMTP.php';
-    require 'vendor/phpmailer/phpmailer/src/Exception.php';
-    require 'vendor/autoload.php';
-    $mail = new PHPMailer(true);
-    try {
-
-        // Configurações do servidor
-        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
-        $mail->isSMTP();        //Devine o uso de SMTP no envio
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 587;
-        $mail->SMTPAuth = true; //Habilita a autenticação SMTP
-        $mail->Username   = 'leandro.b.souza@df.estudante.senai.br';
-        $mail->Password   = '';
-        // Criptografia do envio SSL também é aceito
-        $mail->SMTPSecure = 'SSL';
-        // Define o remetente
-        $mail->setFrom('leandro.b.souza@df.estudante.senai.br');
-        // Define o destinatário
-        $mail->addAddress($email);
-        // Conteúdo da mensagem
-        $mail->isHTML(true);  // Seta o formato do e-mail para aceitar conteúdo HTML
-        $mail->Subject = 'recuperar conta';
-        $mail->Body    = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body> <h1>Código de recuperação<h1>' . $mensagem . '</body></html>';
-        $mail->AltBody = 'Código: ' . $mensagem;
-        // Enviar
-        $mail->send();
-        echo "<h6 class='alert alert-success'> A mensagem foi enviada para {$email} com sucesso!</h6>";
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    function gravacode($id, $data, $code)
+    {
+        require("./conectar.php");
+        $query = mysqli_query($conn, "INSERT INTO `recuperar`(`id`, `code`, `dt`, `valido`) VALUES ('$id','$code','$data','1')") or die(mysqli_error($conn));
     }
-    echo "<script>alert('Código enviado para seu email')</script>";
-}
+
+    function EnviarMail($mensagem, $email)
+    {
+        require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+        require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+        require 'vendor/phpmailer/phpmailer/src/Exception.php';
+        require 'vendor/autoload.php';
+        $mail = new PHPMailer(true);
+        try {
+
+            // Configurações do servidor
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();        //Devine o uso de SMTP no envio
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = 587;
+            $mail->SMTPAuth = true; //Habilita a autenticação SMTP
+            $mail->Username   = 'leandro.b.souza@df.estudante.senai.br';
+            $mail->Password   = '';
+            // Criptografia do envio SSL também é aceito
+            $mail->SMTPSecure = 'SSL';
+            // Define o remetente
+            $mail->setFrom('leandro.b.souza@df.estudante.senai.br');
+            // Define o destinatário
+            $mail->addAddress($email);
+            // Conteúdo da mensagem
+            $links = "http://localhost/site/recuperarsenha.php";
+            $mail->isHTML(true);  // Seta o formato do e-mail para aceitar conteúdo HTML
+            $mail->Subject = 'recuperar conta';
+            $mail->Body    = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body> <h1>Código de recuperação<h1>' . ' Code: ' . $mensagem . '   Link: ' . $links . '</body></html>';
+            $mail->AltBody = 'Código: ' . $mensagem . 'Link: ' . $links;
+            // Enviar
+            $mail->send();
+            echo "<script>alert('A mensagem foi enviada para {$email}.')</script>";
+            //header("Location:index.php");
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+        echo "<script>alert('Código enviado para seu email')</script>";
+        header("Location:index.php");
+    }
+
+    function alterar_senha($senha, $code, $confirme)
+    {
+
+        if ($senha <> $confirme) {
+            echo "<script>alert('A Senha não confere!Favor digite novamente.')</script>";
+        } else {
+            $data = Date('d-m-Y');
+            require("./conectar.php");
+            $query = mysqli_query($conn, "SELECT * FROM `recuperar` WHERE code='$code' and dt='$data' and valido ='1'");
+            if (mysqli_num_rows($query)) {
+                while ($array = mysqli_fetch_row($query)) {
+                    $id = $array[0];
+                }
+                $cript = base64_encode($senha);
+                $query = mysqli_query($conn, "UPDATE `usuarios` SET `senha`='$cript' WHERE id='$id'");
+                $query = mysqli_query($conn, "UPDATE `recuperar` SET `valido`='0'");
+                echo "<script>alert('Senha atualizada com sucesso!')</script>";
+                header("Location:index.php");
+            } else {
+                echo "<script>alert('Código não existe ou já expirou!')</script>";
+            }
+        }
+    }
+
+
+//////////////////////////////////Relatórios
+function clientes_excel()
+  {
+    require("./conectar.php");
+    $color ="";
+    $cor ="";
+    $nome=$_SESSION['impressão'];
+    $pes = $_SESSION['op'];
+    
+    
+    if($pes == "Todos"){
+        $query = mysqli_query($conn, "SELECT * FROM clientes WHERE 1");
+        if (mysqli_num_rows($query)) {
+            $estilos[0] = "background-color: #ecb605;font-size:18px;color:black;font-style:bold;font-family:Arial;
+            text-align: center; width: 100%;";
+           
+            echo "<table style=\"width: Auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
+              <td style=\"$estilos[0]\">ID</td>
+              <td style=\"$estilos[0]\">NOME</td>
+              <td style=\"$estilos[0]\">SOBRENOME</td>
+              <td style=\"$estilos[0]\">ENDEREÇO</td>
+              <td style=\"$estilos[0]\">ESTADO</td>
+              <td style=\"$estilos[0]\">CIDADE</td>
+              <td style=\"$estilos[0]\">lOTE</td>
+              <td style=\"$estilos[0]\">COMPLEMENTO</td>
+              <td style=\"$estilos[0]\">CEP</td>
+              <td style=\"$estilos[0]\">TEL</td>
+              <td style=\"$estilos[0]\">CEL</td>
+              <td style=\"$estilos[0]\">SEXO</td>
+              <td style=\"$estilos[0]\">EMAIL</td>
+              <td style=\"$estilos[0]\">NASCIMENTO</td>
+              <td style=\"$estilos[0]\">DATA CADASTRO</td>
+              <td style=\"$estilos[0]\">OBS</td>
+               </tr>";
+            while ($array = mysqli_fetch_row($query)) {
+              $cor = $array[7];
+              if($cor == "TODOS"){$color = "Snow";}else{$color = "Yellow";}
+    
+              $estilos[1] = "background-color:{$color};font-size:16px;color:black;
+              font-style:bold;font-family: Times New Roman, Times, serif;
+              text-align: center; width: 100%;";
+              echo "<tr>
+              <td style=\"$estilos[1]\">$array[0]</td>
+              <td style=\"$estilos[1]\">$array[1]</td>
+              <td style=\"$estilos[1]\">$array[2]</td>
+              <td style=\"$estilos[1]\">$array[3]</td>
+              <td style=\"$estilos[1]\">$array[4]</td>
+              <td style=\"$estilos[1]\">$array[14]</td>
+              <td style=\"$estilos[1]\">$array[15]</td>
+              <td style=\"$estilos[1]\">$array[5]</td>
+              <td style=\"$estilos[1]\">$array[6]</td>
+              <td style=\"$estilos[1]\">$array[7]</td>
+              <td style=\"$estilos[1]\">$array[8]</td>
+              <td style=\"$estilos[1]\">$array[9]</td>
+              <td style=\"$estilos[1]\">$array[10]</td>
+              <td style=\"$estilos[1]\">$array[11]</td>
+              <td style=\"$estilos[1]\">$array[12]</td>
+              <td style=\"$estilos[1]\">$array[13]</td>
+               </tr>";
+            }
+          } 
+    }
+    if($pes == "Todos"){
+        $query = mysqli_query($conn, "SELECT * FROM clientes WHERE nome='$nome'");
+        if (mysqli_num_rows($query)) {
+            $estilos[0] = "background-color: #ecb605;font-size:18px;color:black;font-style:bold;font-family:Arial;
+            text-align: center; width: 100%;";
+           
+            echo "<table style=\"width: Auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
+              <td style=\"$estilos[0]\">ID</td>
+              <td style=\"$estilos[0]\">NOME</td>
+              <td style=\"$estilos[0]\">SOBRENOME</td>
+              <td style=\"$estilos[0]\">ENDEREÇO</td>
+              <td style=\"$estilos[0]\">ESTADO</td>
+              <td style=\"$estilos[0]\">CIDADE</td>
+              <td style=\"$estilos[0]\">lOTE</td>
+              <td style=\"$estilos[0]\">COMPLEMENTO</td>
+              <td style=\"$estilos[0]\">CEP</td>
+              <td style=\"$estilos[0]\">TEL</td>
+              <td style=\"$estilos[0]\">CEL</td>
+              <td style=\"$estilos[0]\">SEXO</td>
+              <td style=\"$estilos[0]\">EMAIL</td>
+              <td style=\"$estilos[0]\">NASCIMENTO</td>
+              <td style=\"$estilos[0]\">DATA CADASTRO</td>
+              <td style=\"$estilos[0]\">OBS</td>
+               </tr>";
+            while ($array = mysqli_fetch_row($query)) {
+              $cor = $array[7];
+              if($cor == "TODOS"){$color = "Snow";}else{$color = "Yellow";}
+    
+              $estilos[1] = "background-color:{$color};font-size:16px;color:black;
+              font-style:bold;font-family: Times New Roman, Times, serif;
+              text-align: center; width: 100%;";
+              echo "<tr>
+              <td style=\"$estilos[1]\">$array[0]</td>
+              <td style=\"$estilos[1]\">$array[1]</td>
+              <td style=\"$estilos[1]\">$array[2]</td>
+              <td style=\"$estilos[1]\">$array[3]</td>
+              <td style=\"$estilos[1]\">$array[4]</td>
+              <td style=\"$estilos[1]\">$array[14]</td>
+              <td style=\"$estilos[1]\">$array[15]</td>
+              <td style=\"$estilos[1]\">$array[5]</td>
+              <td style=\"$estilos[1]\">$array[6]</td>
+              <td style=\"$estilos[1]\">$array[7]</td>
+              <td style=\"$estilos[1]\">$array[8]</td>
+              <td style=\"$estilos[1]\">$array[9]</td>
+              <td style=\"$estilos[1]\">$array[10]</td>
+              <td style=\"$estilos[1]\">$array[11]</td>
+              <td style=\"$estilos[1]\">$array[12]</td>
+              <td style=\"$estilos[1]\">$array[13]</td>
+               </tr>";
+            }
+          } 
+    }
+
+     
+  }
+
+
 }
