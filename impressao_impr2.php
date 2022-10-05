@@ -2,7 +2,7 @@
 use Dompdf\Dompdf;
 require_once 'vendor/autoload.php';
 //require __DIR__. '/vendor/autoload.php';
-$dompdf = new Dompdf(["enable_remote" => true]);
+$dompdf = new Dompdf(["enable_remote" => false]);
 ob_start();
 require __DIR__.'/impressao.php';
 $pdf = ob_get_clean(); 
