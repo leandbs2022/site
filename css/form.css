@@ -38,6 +38,11 @@ fieldset#endereco{
     background: url("../img/icone-endereco.png") no-repeat 95% 95%;
     
 }
+fieldset#produto{
+    
+    background: url("../img/produto.png") no-repeat 95% 95%;
+    background-position:right;
+}
 fieldset#mensagem{
     
     background: url("../img/icone-mensagem.png") no-repeat 95% 95%;

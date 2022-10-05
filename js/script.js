@@ -64,7 +64,6 @@ function frame(pages) {
       break;
     case 1:
       document.getElementById('telas').src = 'clientes.php'
-      document.getElementById('telas')
       break;
     case 2:
       document.getElementById('telas').src = 'funcionarios.php'
@@ -77,6 +76,9 @@ function frame(pages) {
       break;
     case 5:
       document.getElementById('telas').src = 'usuarios.php'
+      break;
+      case 6:
+      document.getElementById('telas').src = 'relatorio1.php'
       break;
     default:
       break;

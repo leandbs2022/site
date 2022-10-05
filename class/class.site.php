@@ -12,7 +12,7 @@ class site //classe - Funcões
     function login($nome, $senha)
     {
         require("./conectar.php");
-        $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+        $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'")  or die(mysqli_error($conn));;
         if (mysqli_num_rows($query)) {
             while ($array = mysqli_fetch_row($query)) {
                 $cript = $array[2];
@@ -69,7 +69,7 @@ class site //classe - Funcões
             echo "<script>alert('O usuário ja existe!')</script>";
         } else {
             $cript = base64_encode($senha);
-            $query = mysqli_query($conn, "INSERT INTO `usuarios`(`nome`, `senha`, `perfil`, `email`) VALUES ('$nome','$cript','$perfil','$email')");
+            $query = mysqli_query($conn, "INSERT INTO `usuarios`(`nome`, `senha`, `perfil`, `email`) VALUES ('$nome','$cript','$perfil','$email')")  or die(mysqli_error($conn));;
             echo "<script>alert('o usuário criado com sucesso!')</script>";
         }
     }
@@ -82,13 +82,13 @@ class site //classe - Funcões
         } else {
 
             require("./conectar.php");
-            $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+            $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'")  or die(mysqli_error($conn));;
             if (mysqli_num_rows($query)) {
                 while ($array = mysqli_fetch_row($query)) {
                     $id = $array[0];
                 }
                 $cript = base64_encode($senha);
-                $query = mysqli_query($conn, "UPDATE `usuarios` SET `senha`='$cript',`perfil`='$perfil',`email`='$email' WHERE id='$id'");
+                $query = mysqli_query($conn, "UPDATE `usuarios` SET `senha`='$cript',`perfil`='$perfil',`email`='$email' WHERE id='$id'")  or die(mysqli_error($conn));;
                 echo "<script>alert('o usuário atualizado com sucesso!')</script>";
             } else {
                 echo "<script>alert('o usuário não existe!')</script>";
@@ -102,7 +102,7 @@ class site //classe - Funcões
             echo "<script>alert('Faça uma busca do usuário a ser deletado depois click em deletar!')</script>";
         } else {
             require("./conectar.php");
-            $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+            $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'") or die(mysqli_error($conn));;
             if (mysqli_num_rows($query)) {
                 while ($array = mysqli_fetch_row($query)) {
                     $id = $array[0];
@@ -119,7 +119,7 @@ class site //classe - Funcões
     {
 
         require("./conectar.php");
-        $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'");
+        $query = mysqli_query($conn, "SELECT * FROM `usuarios` WHERE nome='$nome'")  or die(mysqli_error($conn));;
         if (mysqli_num_rows($query)) {
             /* $estilos[0] = "background-color: #e3f2fd;font-size:18px;color:black;font-style:bold;font-family:Arial;
       text-align: center; width:auto;";
@@ -152,7 +152,7 @@ class site //classe - Funcões
     }
 
     ///////////////////////////////////////////////////Cadastro de clientes///////////////////////////////////////////////////
-    function cliente_add($nome, $sobre,$tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad)
+    function cliente_add($nome, $sobre, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad)
     {
         require("./conectar.php");
         $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE email='$email'");
@@ -174,12 +174,12 @@ class site //classe - Funcões
             echo "<script>alert('o usuário criado com sucesso!')</script>";
         }
     }
-    function cliente_alt($nome,$sobre,$tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad)
+    function cliente_alt($nome, $sobre, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc)
     {
         require("./conectar.php");
         $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE email='$email'");
         if (mysqli_num_rows($query)) {
-
+            $id = 0;
             $nome =   ucwords($nome);
             $sobre =   ucwords($sobre);
             $obs =  ucwords($obs);
@@ -189,10 +189,16 @@ class site //classe - Funcões
             $cidade =  ucwords($cidade);
             $complemento =  ucwords($complemento);
 
-            $query = mysqli_query($conn, "UPDATE `clientes` SET `nome`='$nome',`sobre`='$sobre',`endereco`='$endereco',`estado`='$estado',`cidade`='$cidade',`cep`='$cep',`tel`='$tel',`cel`='$cel',`sexo`='$tgenero',`email`='$email',`data_nasc`='$dt_nasc',`data`='$dt_cad',
-            `obs`='$obs',`lote`='$casa',`comple`='$complemento' WHERE 1") or die(mysqli_error($conn));
-            echo "<script>alert('o usuário alterado com sucesso!')</script>";
-        }else{
+            $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE email='$email'");
+            if (mysqli_num_rows($query)) {
+                while ($array = mysqli_fetch_row($query)) {
+                    $id = $array[0];
+                }
+                $query = mysqli_query($conn, "UPDATE `clientes` SET `nome`='$nome',`sobre`='$sobre',`endereco`='$endereco',`estado`='$estado',`cidade`='$cidade',`cep`='$cep',`tel`='$tel',`cel`='$cel',`sexo`='$tgenero',`email`='$email',`data_nasc`='$dt_nasc',
+            `obs`='$obs',`lote`='$casa',`comple`='$complemento' WHERE id_clientes='$id'") or die(mysqli_error($conn));
+                echo "<script>alert('o usuário alterado com sucesso!')</script>";
+            }
+        } else {
 
             echo "<script>alert('o usuário não encontrado!')</script>";
         }
@@ -203,74 +209,77 @@ class site //classe - Funcões
         if (empty($nome)) {
             echo "<script>alert('Faça uma busca do cliente a ser deletado depois click em deletar!')</script>";
         } else {
-                require("./conectar.php");
+            require("./conectar.php");
 
-                $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE nome='$nome'");
-                if (mysqli_num_rows($query)) {
-                    while ($array = mysqli_fetch_row($query)) {
-                        $id = $array[0];
-                    }
-                    echo "teste";
-                    $query  = mysqli_query($conn, "DELETE FROM `clientes` WHERE id_clientes='$id'") or die(mysqli_error($conn));
-                        echo "<script>alert('o cliente deletado com sucesso!')</script>";
-                   
-                } else {
-
-                    echo "<script>alert('Verificar se cliente que deseja deleta realmente existe!')</script>";
+            $query = mysqli_query($conn, "SELECT * FROM `clientes` WHERE nome='$nome'");
+            if (mysqli_num_rows($query)) {
+                while ($array = mysqli_fetch_row($query)) {
+                    $id = $array[0];
                 }
+                echo "teste";
+                $query  = mysqli_query($conn, "DELETE FROM `clientes` WHERE id_clientes='$id'") or die(mysqli_error($conn));
+                echo "<script>alert('o cliente deletado com sucesso!')</script>";
+            } else {
+
+                echo "<script>alert('Verificar se cliente que deseja deleta realmente existe!')</script>";
+            }
         }
     }
 
-    //Cadastro de funcionario
-    function funcionario_add_alt()
+ ///////////////////////////////////////////////////Cadastro de produtos///////////////////////////////////////////////////
+    function produto_alt($produto, $marca, $modelo, $valor, $descr, $tipo, $dt_cad, $quant)
     {
+        require("./conectar.php");
+        $query = mysqli_query($conn, "SELECT * FROM `produtos` WHERE produto='$produto'")  or die(mysqli_error($conn));;
+        if (mysqli_num_rows($query)) {
+            $id = 0;
+            $produto =   ucwords($produto);
+            $marca =   ucwords($marca);
+            $modelo =  ucwords($modelo);
+            $tipo = strtoupper($tipo);
+            $descr =  strtoupper($descr);
+            $query = mysqli_query($conn, "SELECT * FROM `produtos` WHERE produto='$produto'")  or die(mysqli_error($conn));;
+            if (mysqli_num_rows($query)) {
+                while ($array = mysqli_fetch_row($query)) {
+                    $id = $array[0];
+                }
+                $query = mysqli_query($conn, "UPDATE `produtos` SET `produto`='$produto',`valor`='$valor',`quant`='$quant',`dt_atualizada`='$dt_cad',
+            `marca`='$marca',`modelo`='$modelo',`tipo`='$tipo',`descricao`='$descr' WHERE id_produtos='$id'") or die(mysqli_error($conn));
+                echo "<script>alert('Produto alterado com sucesso!')</script>";
+            }
+        } else {
+            echo "<script>alert('Produto não encontrado!')</script>";
+        }
     }
-    function funcionario_del()
+    function produto_add($produto, $marca, $modelo, $valor, $descr, $tipo, $dt_cad, $quant)
     {
-    }
-    function localizar_funcionarios()
-    {
-    }
+        require("./conectar.php");
+        $query = mysqli_query($conn, "SELECT * FROM `produtos` WHERE produto='$produto'");
+        if (mysqli_num_rows($query)) {
+            echo "<script>alert('Este produto já existe!')</script>";
+        } else {
 
-    //Cadastro de forndecedor
-    function forndecedor_add_alt()
-    {
-    }
-    function forndecedor_del()
-    {
-    }
-    function localizar_forndecedores()
-    {
-    }
+            $produto =   ucwords($produto);
+            $marca =   ucwords($marca);
+            $modelo =  ucwords($modelo);
+            $tipo = strtoupper($tipo);
+            $descr =  strtoupper($descr);
 
-    //Cadastro de produto
-    function produto_add_alt()
-    {
+            $query = mysqli_query($conn, "INSERT INTO `produtos`(`produto`, `valor`, `quant`, `dt_atualizada`, `marca`, `modelo`, `tipo`, `descricao`) 
+            VALUES ('$produto','$valor','$quant','$dt_cad','$marca','$modelo','$tipo','$descr')") or die(mysqli_error($conn));
+            echo "<script>alert('o produto criado com sucesso!')</script>";
+        }
     }
     function produto_del()
     {
+        echo "<script>alert('Produto não pode ser deletado só alterado!')</script>";
     }
     function localizar_produtos()
     {
     }
 
     //vendas
-    function vendas_add()
-    {
-    }
-    function vendas_alt()
-    {
-    }
-    function localizar_vendas()
-    {
-    }
-
-
-    //relatorios excel / PDF
-    function excel()
-    {
-    }
-    function pdf()
+    function vendas_automatica()
     {
     }
 
@@ -336,7 +345,6 @@ class site //classe - Funcões
         echo "<script>alert('Código enviado para seu email')</script>";
         header("Location:index.php");
     }
-
     function alterar_senha($senha, $code, $confirme)
     {
 
@@ -345,7 +353,7 @@ class site //classe - Funcões
         } else {
             $data = Date('d-m-Y');
             require("./conectar.php");
-            $query = mysqli_query($conn, "SELECT * FROM `recuperar` WHERE code='$code' and dt='$data' and valido ='1'");
+            $query = mysqli_query($conn, "SELECT * FROM `recuperar` WHERE code='$code' and dt='$data' and valido ='1'")  or die(mysqli_error($conn));;
             if (mysqli_num_rows($query)) {
                 while ($array = mysqli_fetch_row($query)) {
                     $id = $array[0];
@@ -362,123 +370,139 @@ class site //classe - Funcões
     }
 
 
-//////////////////////////////////Relatórios
-function clientes_excel()
-  {
-    require("./conectar.php");
-    $color ="";
-    $cor ="";
-    $nome=$_SESSION['impressão'];
-    $pes = $_SESSION['op'];
-    
-    
-    if($pes == "Todos"){
-        $query = mysqli_query($conn, "SELECT * FROM clientes WHERE 1");
-        if (mysqli_num_rows($query)) {
-            $estilos[0] = "background-color: #ecb605;font-size:18px;color:black;font-style:bold;font-family:Arial;
-            text-align: center; width: 100%;";
-           
-            echo "<table style=\"width: Auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
+    //////////////////////////////////Relatórios//////////////////////////////////////////////////////////
+    function produtos(){
+        require("./conectar.php");
+        $color="#ffffff";
+        $query = mysqli_query($conn, "SELECT * FROM produtos WHERE 1")  or die(mysqli_error($conn));;
+            if (mysqli_num_rows($query)) {
+                $estilos[0] = "background-color: #BDBDBD;font-size:12px;color:black;font-style:bold;font-family:Arial;
+            text-align: center; width: 15%;";
+
+                echo "<table style=\"width:auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
               <td style=\"$estilos[0]\">ID</td>
-              <td style=\"$estilos[0]\">NOME</td>
-              <td style=\"$estilos[0]\">SOBRENOME</td>
-              <td style=\"$estilos[0]\">ENDEREÇO</td>
-              <td style=\"$estilos[0]\">ESTADO</td>
-              <td style=\"$estilos[0]\">CIDADE</td>
-              <td style=\"$estilos[0]\">lOTE</td>
-              <td style=\"$estilos[0]\">COMPLEMENTO</td>
-              <td style=\"$estilos[0]\">CEP</td>
-              <td style=\"$estilos[0]\">TEL</td>
-              <td style=\"$estilos[0]\">CEL</td>
-              <td style=\"$estilos[0]\">SEXO</td>
-              <td style=\"$estilos[0]\">EMAIL</td>
-              <td style=\"$estilos[0]\">NASCIMENTO</td>
-              <td style=\"$estilos[0]\">DATA CADASTRO</td>
-              <td style=\"$estilos[0]\">OBS</td>
+              <td style=\"$estilos[0]\">PRODUTO</td>
+              <td style=\"$estilos[0]\">VALOR</td>
+              <td style=\"$estilos[0]\">QUANT</td>
+              <td style=\"$estilos[0]\">ATUALIZAÇÃO</td>
+              <td style=\"$estilos[0]\">MARCA</td>
+              <td style=\"$estilos[0]\">MODELO</td>
+              <td style=\"$estilos[0]\">TIPO</td>
                </tr>";
-            while ($array = mysqli_fetch_row($query)) {
-              $cor = $array[7];
-              if($cor == "TODOS"){$color = "Snow";}else{$color = "Yellow";}
-    
-              $estilos[1] = "background-color:{$color};font-size:16px;color:black;
+
+                while ($array = mysqli_fetch_row($query)) {
+                    $estilos[1] = "background-color:{$color};font-size:12px;color:black;
               font-style:bold;font-family: Times New Roman, Times, serif;
-              text-align: center; width: 100%;";
-              echo "<tr>
+              text-align: center; width: auto;";
+                    echo "<tr>
               <td style=\"$estilos[1]\">$array[0]</td>
               <td style=\"$estilos[1]\">$array[1]</td>
               <td style=\"$estilos[1]\">$array[2]</td>
               <td style=\"$estilos[1]\">$array[3]</td>
               <td style=\"$estilos[1]\">$array[4]</td>
-              <td style=\"$estilos[1]\">$array[14]</td>
-              <td style=\"$estilos[1]\">$array[15]</td>
               <td style=\"$estilos[1]\">$array[5]</td>
               <td style=\"$estilos[1]\">$array[6]</td>
               <td style=\"$estilos[1]\">$array[7]</td>
-              <td style=\"$estilos[1]\">$array[8]</td>
-              <td style=\"$estilos[1]\">$array[9]</td>
-              <td style=\"$estilos[1]\">$array[10]</td>
-              <td style=\"$estilos[1]\">$array[11]</td>
-              <td style=\"$estilos[1]\">$array[12]</td>
-              <td style=\"$estilos[1]\">$array[13]</td>
                </tr>";
+                }
             }
-          } 
     }
-    if($pes == "Todos"){
-        $query = mysqli_query($conn, "SELECT * FROM clientes WHERE nome='$nome'");
-        if (mysqli_num_rows($query)) {
-            $estilos[0] = "background-color: #ecb605;font-size:18px;color:black;font-style:bold;font-family:Arial;
-            text-align: center; width: 100%;";
-           
-            echo "<table style=\"width: Auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
+    
+    function clientes_excel()
+    {
+        require("./conectar.php");
+        $color = "";
+        $cor = "";
+        $nome = $_SESSION['impressão'];
+        $pes = $_SESSION['op'];
+        $count = 1;
+        $number = 0;
+        $n = 0;
+        ////todos os usuários
+        if ($pes == "Todos") {
+            $query = mysqli_query($conn, "SELECT * FROM clientes WHERE 1")  or die(mysqli_error($conn));;
+            if (mysqli_num_rows($query)) {
+                $estilos[0] = "background-color: #BDBDBD;font-size:12px;color:black;font-style:bold;font-family:Arial;
+            text-align: center; width: auto%;";
+
+                echo "<table style=\"width: Auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
               <td style=\"$estilos[0]\">ID</td>
               <td style=\"$estilos[0]\">NOME</td>
               <td style=\"$estilos[0]\">SOBRENOME</td>
               <td style=\"$estilos[0]\">ENDEREÇO</td>
+              <td style=\"$estilos[0]\">LOTE</td>
               <td style=\"$estilos[0]\">ESTADO</td>
               <td style=\"$estilos[0]\">CIDADE</td>
-              <td style=\"$estilos[0]\">lOTE</td>
-              <td style=\"$estilos[0]\">COMPLEMENTO</td>
               <td style=\"$estilos[0]\">CEP</td>
               <td style=\"$estilos[0]\">TEL</td>
               <td style=\"$estilos[0]\">CEL</td>
-              <td style=\"$estilos[0]\">SEXO</td>
               <td style=\"$estilos[0]\">EMAIL</td>
-              <td style=\"$estilos[0]\">NASCIMENTO</td>
-              <td style=\"$estilos[0]\">DATA CADASTRO</td>
-              <td style=\"$estilos[0]\">OBS</td>
+             
+              
                </tr>";
-            while ($array = mysqli_fetch_row($query)) {
-              $cor = $array[7];
-              if($cor == "TODOS"){$color = "Snow";}else{$color = "Yellow";}
-    
-              $estilos[1] = "background-color:{$color};font-size:16px;color:black;
+
+                while ($array = mysqli_fetch_row($query)) {
+                    $estilos[1] = "background-color:{$color};font-size:12px;color:black;
               font-style:bold;font-family: Times New Roman, Times, serif;
-              text-align: center; width: 100%;";
-              echo "<tr>
+              text-align: center; width: auto;";
+                    echo "<tr>
               <td style=\"$estilos[1]\">$array[0]</td>
               <td style=\"$estilos[1]\">$array[1]</td>
               <td style=\"$estilos[1]\">$array[2]</td>
               <td style=\"$estilos[1]\">$array[3]</td>
-              <td style=\"$estilos[1]\">$array[4]</td>
               <td style=\"$estilos[1]\">$array[14]</td>
-              <td style=\"$estilos[1]\">$array[15]</td>
+              <td style=\"$estilos[1]\">$array[4]</td>
               <td style=\"$estilos[1]\">$array[5]</td>
               <td style=\"$estilos[1]\">$array[6]</td>
               <td style=\"$estilos[1]\">$array[7]</td>
               <td style=\"$estilos[1]\">$array[8]</td>
-              <td style=\"$estilos[1]\">$array[9]</td>
               <td style=\"$estilos[1]\">$array[10]</td>
-              <td style=\"$estilos[1]\">$array[11]</td>
-              <td style=\"$estilos[1]\">$array[12]</td>
-              <td style=\"$estilos[1]\">$array[13]</td>
                </tr>";
+                }
             }
-          } 
+        }
+        ///unico usuário
+        if ($pes == "Individual") {
+            $query = mysqli_query($conn, "SELECT * FROM clientes WHERE nome='$nome'")  or die(mysqli_error($conn));;
+            if (mysqli_num_rows($query)) {
+                $estilos[0] = "background-color: #BDBDBD;font-size:12px;color:black;font-style:bold;font-family:Arial;
+            text-align: center; width: auto%;";
+
+                echo "<table style=\"width: Auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
+              <td style=\"$estilos[0]\">ID</td>
+              <td style=\"$estilos[0]\">NOME</td>
+              <td style=\"$estilos[0]\">SOBRENOME</td>
+              <td style=\"$estilos[0]\">ENDEREÇO</td>
+              <td style=\"$estilos[0]\">LOTE</td>
+              <td style=\"$estilos[0]\">ESTADO</td>
+              <td style=\"$estilos[0]\">CIDADE</td>
+              <td style=\"$estilos[0]\">CEP</td>
+              <td style=\"$estilos[0]\">TEL</td>
+              <td style=\"$estilos[0]\">CEL</td>
+              <td style=\"$estilos[0]\">EMAIL</td>
+             
+              
+               </tr>";
+
+                while ($array = mysqli_fetch_row($query)) {
+                    $estilos[1] = "background-color:{$color};font-size:12px;color:black;
+              font-style:bold;font-family: Times New Roman, Times, serif;
+              text-align: center; width: auto;";
+                    echo "<tr>
+              <td style=\"$estilos[1]\">$array[0]</td>
+              <td style=\"$estilos[1]\">$array[1]</td>
+              <td style=\"$estilos[1]\">$array[2]</td>
+              <td style=\"$estilos[1]\">$array[3]</td>
+              <td style=\"$estilos[1]\">$array[14]</td>
+              <td style=\"$estilos[1]\">$array[4]</td>
+              <td style=\"$estilos[1]\">$array[5]</td>
+              <td style=\"$estilos[1]\">$array[6]</td>
+              <td style=\"$estilos[1]\">$array[7]</td>
+              <td style=\"$estilos[1]\">$array[8]</td>
+              <td style=\"$estilos[1]\">$array[10]</td>
+               </tr>";
+                }
+            }
+        }
     }
-
-     
-  }
-
-
 }

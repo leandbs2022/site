@@ -62,12 +62,12 @@ $resposta = $db->validar();
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#" onclick="frame(pages = 1) ">Clientes</a></li>
-                    <li><a class="dropdown-item disabled" href="#" onclick="frame(pages = 2) ">Funcionarios</a></li>
+                    <!--<li><a class="dropdown-item disabled" href="#" onclick="frame(pages = 2) ">Funcionarios</a></li>-->
                     <li>
                       <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item disabled" href="#" onclick="frame(pages = 3) ">Produtos</a></li>
-                    <li><a class="dropdown-item disabled" href="#" onclick="frame(pages = 4) ">Fornecedores</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="frame(pages = 3) ">Produtos</a></li>
+                    <!--<li><a class="dropdown-item disabled" href="#" onclick="frame(pages = 4) ">Fornecedores</a></li>-->
                     <li>
                       <hr class="dropdown-divider">
                     </li>
@@ -77,8 +77,13 @@ $resposta = $db->validar();
                 <li class="nav-item">
                   <a class="nav-link disabled">Gerador de vendas</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="relatorios.php" target="_black">Relatórios</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Relatórios
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="frame(pages = 0) ">Vendas</a></li>
+                  </ul>
                 </li>
               </ul>
             </div>

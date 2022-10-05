@@ -25,6 +25,7 @@ $sobre = "";
 $op = '0';
 //perfil de acesso
 $permissao = $_SESSION["perfil"];
+$_SESSION[('pdf')] = "";
 ?>
 <!DOCTYPE html>
 <html lang="pt=br">
@@ -42,9 +43,7 @@ $permissao = $_SESSION["perfil"];
     <script src="js/funcoes.js"></script>
     <title>cadastro de Clientes</title>
 </head>
-
-<body onload="botao()">
-    <header class="container">
+<header class="container">
         <div class="mt-md-1">
             <div class="row ajuste">
                 <h1 class="alert alert-primary titulo centro borda fontebranca">Clientes</h1>
@@ -52,51 +51,40 @@ $permissao = $_SESSION["perfil"];
                     <hgroup>
                         <h1 class="centro fontebranca">Formulário de cliente</h1>
                         <?php
-                        if (isset($_POST['timpressaoexcel'])) {
-                            $nome =  $_POST['tnome'];
-                            $seleciona = $_POST['tcliente'];
-                            echo "<script>alert('$seleciona')</script>";
-                            switch ($seleciona) {
-                                case '1':
-                                    $pes = 'Todos';
-                                    $_SESSION['impressão'] = $_POST['tnome'];
-                                    $_SESSION['op'] = $pes;
-                                    header("Location:impressao_impr.php");
-                                    break;
-                                case '2':
-                                    $pes = 'Individual';
-                                    if ($pes == "Individual") {
-                                        if (empty($nome)) {
-                                            echo "<script>alert('Faça uma busca do cliente a ser gerado relatorório!')</script>";
-                                        } else {
 
-                                            $_SESSION['impressão'] = $_POST['tnome'];
-                                            $_SESSION['op'] = $pes;
-                                            header("Location:impressao_impr.php");
-                                        }
-                                    }
-                                    break;
-                                default:
-                                    break;
+                        if (isset($_POST['timpressaoexcel'])) {
+                            $op = $_POST[('tcliente')];
+                            $nome =  $_POST['tnome'];
+                            if ($op == "Individual" or $op == "Todos") {
+
+                                if (empty($nome) and $op == "Individual") {
+                                    echo "<script>alert('Faça uma busca do cliente a ser gerado relatorório!')</script>";
+                                } else {
+
+                                    $_SESSION['impressão'] = $_POST['tnome'];
+                                    $_SESSION['op'] = $op;
+
+                                    header("Location:impressao_impr.php");
+                                }
                             }
                         }
 
-
                         if (isset($_POST['timpressaopdf'])) {
+                            $op = $_POST[('tcliente')];
                             $nome =  $_POST['tnome'];
 
-                            echo "<script>alert('Recurso em desenvolvimento!')</script>";
-                            /*if (empty($nome)) {
-                                echo "<script>alert('Faça uma busca do cliente a ser gerado relatorório!')</script>";
-                            } else {
+                            if ($op == "Individual" or $op == "Todos") {
 
-                                $_SESSION['impressão'] = $_POST['tnome'];
-                                $_SESSION['op'] = $op;
-                                header("Location:impressao_impr2.php");     
-                            }*/
+                                if (empty($nome) and $op == "Individual") {
+                                    echo "<script>alert('Faça uma busca do cliente a ser gerado relatorório!')</script>";
+                                } else {
+
+                                    $_SESSION['impressão'] = $_POST['tnome'];
+                                    $_SESSION['op'] = $op;
+                                    header("Location:impressao_impr2.php");
+                                }
+                            }
                         }
-
-
                         if (isset($_POST['tlocaliza'])) {
 
                             $nome = $_POST['tloc'];
@@ -132,7 +120,10 @@ $permissao = $_SESSION["perfil"];
                         }
                         ?>
                     </hgroup>
-
+                    </header>
+<body onload="botao()">
+    
+                    <section>
                     <fieldset id="cliente">
                         <legend id="legenda">Identificação do Cliente</legend>
                         <p class="fontebranca">ID:<?php echo $id; ?></p>
@@ -289,22 +280,19 @@ $permissao = $_SESSION["perfil"];
                             $estado = $_POST['test'];
                             $cidade = $_POST['tcid'];
                             $dt_nasc = $_POST['tnasc'];
-                            $dt_cad = date('d-m-Y');
-
                             if (
                                 empty($nome) || empty($sobre) || empty($email) || empty($endereco) || empty($casa) || empty($complemento) ||
                                 empty($estado) || empty($cidade)
                             ) {
                                 echo "<script>alert('Falta preencher algumas informações que são obrigatórias!')</script>";
                             } else {
-                                $resposta = $db->cliente_alt($nome, $sobre, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc, $dt_cad);
+                                $resposta = $db->cliente_alt($nome, $sobre, $tel, $cel, $email, $obs, $tgenero, $cep, $endereco, $casa, $complemento, $estado, $cidade, $dt_nasc);
                             }
                         } else {
                             echo "<script>alert('Você não tem permissão para essa função.')</script>";
                         }
                     }
                     if (isset($_POST['tdel'])) {
-
                         $nome =  $_POST['tnome'];
                         if ($permissao == "1") {
                             $resposta = $db->cliente_del($nome);
@@ -316,7 +304,8 @@ $permissao = $_SESSION["perfil"];
                 </form>
             </div>
         </div>
-    </header>
+        </section>
+
 </body>
 
 </html>

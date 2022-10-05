@@ -25,3 +25,8 @@ function botao() {
  
   }
 }
+
+function rolar(){
+  window.scrollBy(0,01);
+  velocidade = setTimeout('rolar()',50);
+  }
