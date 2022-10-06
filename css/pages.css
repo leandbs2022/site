@@ -36,7 +36,26 @@ label {
     width: 100px;
     float: left;
 }
+.progress{
+    height: 15px;
+    background-color: #777;
+    position: relative;
+}
 
+.progress .progress-bar{
+   position: absolute;
+   height: 100%;
+   background-color: #add555;
+   animation: progress-animation 6s infinite;
+}
+
+
+@keyframes progress-animation{
+    0% { width: 0%; }
+    
+    100% { width: 100%}
+    
+}
 .espaco {
 
     right: 500px;
@@ -50,6 +69,11 @@ label {
 width: 100%;
 height: 100vh;
 
+}
+section{
+margin-top: 10px;
+margin-left: 200px;
+margin-right: 200px;
 }
 #pesq{
 opacity: 0;
@@ -66,6 +90,7 @@ opacity: 0;
 
 .perfil {
     width: 310px;
+   
 }
 
 .imgdireita {

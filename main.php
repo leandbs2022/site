@@ -72,11 +72,11 @@ $resposta = $db->validar();
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled">Gerador de vendas</a>
+                  <a class="nav-link" href="#" onclick="frame(pages = 6) ">Gerador de vendas</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Relatórios
+                    Dashbord
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#" onclick="frame(pages = 0) ">Vendas</a></li>

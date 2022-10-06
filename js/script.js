@@ -77,6 +77,9 @@ function frame(pages) {
     case 5:
       document.getElementById("telas").src = "usuarios.php";
       break;
+      case 6:
+        document.getElementById("telas").src = "vendaautomatica.php";
+        break;
     default:
       break;
   }

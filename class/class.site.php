@@ -22,6 +22,7 @@ class site //classe - Funcões
                     $_SESSION['data'] = date('d/m/Y H:i');
                     $_SESSION['nome'] = $array[1];
                     $_SESSION['perfil'] = $array[3];
+                    $_SESSION['id_f'] = $array[0];
                     echo $_SESSION['perfil'];
                     if ($_SESSION['perfil'] <> 1) {
                         $_SESSION['nivel'] = "Padrão";
@@ -226,7 +227,7 @@ class site //classe - Funcões
         }
     }
 
- ///////////////////////////////////////////////////Cadastro de produtos///////////////////////////////////////////////////
+    ///////////////////////////////////////////////////Cadastro de produtos///////////////////////////////////////////////////
     function produto_alt($produto, $marca, $modelo, $valor, $descr, $tipo, $dt_cad, $quant)
     {
         require("./conectar.php");
@@ -281,8 +282,36 @@ class site //classe - Funcões
     //vendas
     function vendas_automatica()
     {
-    }
+        require("./conectar.php");
+        $id = 0;
+        $id_f = $_SESSION['id_f'];
+        $id_p = 0;
+        $valor = 0;
+        $anoatual = date('Y');
+        $data = rand(2018,  $anoatual);
+        $dia=rand(1,30);
+        $mes=rand(1,12);
+        $datac = $dia.'-'.$mes.'-'.$data; //SELECT * FROM `vendas` WHERE `dt_compra`>'01/01/2018' and `dt_compra`<'01/12/2022';
+        $dt_venda = $datac;
+        $unid = "1";
 
+        $query = mysqli_query($conn, "SELECT * FROM clientes ORDER BY RAND() LIMIT 1") or die(mysqli_error($conn));
+        if (mysqli_num_rows($query)) {
+            while ($array = mysqli_fetch_row($query)) {
+                $id = $array[0];
+            }
+        }
+
+        $query = mysqli_query($conn, "SELECT * FROM produtos ORDER BY RAND() LIMIT 1") or die(mysqli_error($conn));
+        if (mysqli_num_rows($query)) {
+            while ($array = mysqli_fetch_row($query)) {
+                $id_p = $array[0];
+                $valor  = $array[2];
+            }
+        }
+
+        $query = mysqli_query($conn, "INSERT INTO `vendas`(`id_clientes`, `id_produtos`, `id_matricula`, `data`, `valor`, `unid`,`dt_compra`) VALUES ('$id','$id_p','$id_f','$data','$valor','$unid','$dt_venda')") or die(mysqli_error($conn));   
+    }
     //contador de acesso
     function contador_ver()
     {
@@ -371,15 +400,16 @@ class site //classe - Funcões
 
 
     //////////////////////////////////Relatórios//////////////////////////////////////////////////////////
-    function produtos(){
+    function produtos()
+    {
         require("./conectar.php");
-        $color="#ffffff";
+        $color = "#ffffff";
         $query = mysqli_query($conn, "SELECT * FROM produtos WHERE 1")  or die(mysqli_error($conn));;
-            if (mysqli_num_rows($query)) {
-                $estilos[0] = "background-color: #BDBDBD;font-size:14px;color:black;font-style:bold;font-family:Arial;
+        if (mysqli_num_rows($query)) {
+            $estilos[0] = "background-color: #BDBDBD;font-size:14px;color:black;font-style:bold;font-family:Arial;
             text-align: center; width: 15%;";
 
-                echo "<table style=\"width:auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
+            echo "<table style=\"width:auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
               <td style=\"$estilos[0]\">ID</td>
               <td style=\"$estilos[0]\">PRODUTO</td>
               <td style=\"$estilos[0]\">VALOR</td>
@@ -390,11 +420,11 @@ class site //classe - Funcões
               <td style=\"$estilos[0]\">TIPO</td>
                </tr>";
 
-                while ($array = mysqli_fetch_row($query)) {
-                    $estilos[1] = "background-color:{$color};font-size:14px;color:black;
+            while ($array = mysqli_fetch_row($query)) {
+                $estilos[1] = "background-color:{$color};font-size:14px;color:black;
               font-style:bold;font-family: Times New Roman, Times, serif;
               text-align: center; width: auto;";
-                    echo "<tr>
+                echo "<tr>
               <td style=\"$estilos[1]\">$array[0]</td>
               <td style=\"$estilos[1]\">$array[1]</td>
               <td style=\"$estilos[1]\">$array[2]</td>
@@ -404,12 +434,13 @@ class site //classe - Funcões
               <td style=\"$estilos[1]\">$array[6]</td>
               <td style=\"$estilos[1]\">$array[7]</td>
                </tr>";
-                }
             }
+        }
     }
-    function visiualzar_Clientes(){
+    function visiualzar_Clientes()
+    {
         require("./conectar.php");
-        $color="#ffffff";
+        $color = "#ffffff";
         $query = mysqli_query($conn, "SELECT * FROM clientes WHERE 1")  or die(mysqli_error($conn));;
         if (mysqli_num_rows($query)) {
             $estilos[0] = "background-color: #BDBDBD;font-size:12px;color:black;font-style:bold;font-family:Arial;
@@ -447,7 +478,6 @@ class site //classe - Funcões
            </tr>";
             }
         }
-
     }
     function clientes_excel()
     {

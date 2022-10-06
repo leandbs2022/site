@@ -18,7 +18,7 @@ $_SESSION['nivel'] = "";
 $_SESSION[('pdf')] ="";
 $_SESSION["nome_l"] = "";
 $_SESSION['email_l'] = "";
-
+$_SESSION['id_f'] = 0;
 $_SESSION['op'] = "";
 $_SESSION["impressão"] = "";
 //Variaveis
