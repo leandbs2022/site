@@ -305,6 +305,12 @@ $_SESSION[('pdf')] = "";
             </div>
         </div>
         </section>
+        <section>
+        <legend>Passe o mouse abaixo para ver todos os clientes</legend>
+        <div id="pesq" class="bordaT centro ">
+            <?php $resposta = $db->visiualzar_Clientes(); ?>
+        </div>
+        </section>
 
 </body>
 

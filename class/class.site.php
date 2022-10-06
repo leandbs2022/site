@@ -376,7 +376,7 @@ class site //classe - Funcões
         $color="#ffffff";
         $query = mysqli_query($conn, "SELECT * FROM produtos WHERE 1")  or die(mysqli_error($conn));;
             if (mysqli_num_rows($query)) {
-                $estilos[0] = "background-color: #BDBDBD;font-size:12px;color:black;font-style:bold;font-family:Arial;
+                $estilos[0] = "background-color: #BDBDBD;font-size:14px;color:black;font-style:bold;font-family:Arial;
             text-align: center; width: 15%;";
 
                 echo "<table style=\"width:auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
@@ -391,7 +391,7 @@ class site //classe - Funcões
                </tr>";
 
                 while ($array = mysqli_fetch_row($query)) {
-                    $estilos[1] = "background-color:{$color};font-size:12px;color:black;
+                    $estilos[1] = "background-color:{$color};font-size:14px;color:black;
               font-style:bold;font-family: Times New Roman, Times, serif;
               text-align: center; width: auto;";
                     echo "<tr>
@@ -407,7 +407,48 @@ class site //classe - Funcões
                 }
             }
     }
-    
+    function visiualzar_Clientes(){
+        require("./conectar.php");
+        $color="#ffffff";
+        $query = mysqli_query($conn, "SELECT * FROM clientes WHERE 1")  or die(mysqli_error($conn));;
+        if (mysqli_num_rows($query)) {
+            $estilos[0] = "background-color: #BDBDBD;font-size:12px;color:black;font-style:bold;font-family:Arial;
+        text-align: center; width: 15%;";
+
+            echo "<table style=\"width: Auto\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\"><tbody><tr>
+          <td style=\"$estilos[0]\">ID</td>
+          <td style=\"$estilos[0]\">NOME</td>
+          <td style=\"$estilos[0]\">SOBRENOME</td>
+          <td style=\"$estilos[0]\">ENDEREÇO</td>
+          <td style=\"$estilos[0]\">LOTE</td>
+          <td style=\"$estilos[0]\">ESTADO</td>
+          <td style=\"$estilos[0]\">CIDADE</td>
+          <td style=\"$estilos[0]\">CEP</td>
+          <td style=\"$estilos[0]\">TEL</td>
+          <td style=\"$estilos[0]\">CEL</td>
+          <td style=\"$estilos[0]\">EMAIL</td>
+           </tr>";
+            while ($array = mysqli_fetch_row($query)) {
+                $estilos[1] = "background-color:{$color};font-size:12px;color:black;
+          font-style:bold;font-family: Times New Roman, Times, serif;
+          text-align: center; width: auto;";
+                echo "<tr>
+          <td style=\"$estilos[1]\">$array[0]</td>
+          <td style=\"$estilos[1]\">$array[1]</td>
+          <td style=\"$estilos[1]\">$array[2]</td>
+          <td style=\"$estilos[1]\">$array[3]</td>
+          <td style=\"$estilos[1]\">$array[14]</td>
+          <td style=\"$estilos[1]\">$array[4]</td>
+          <td style=\"$estilos[1]\">$array[5]</td>
+          <td style=\"$estilos[1]\">$array[6]</td>
+          <td style=\"$estilos[1]\">$array[7]</td>
+          <td style=\"$estilos[1]\">$array[8]</td>
+          <td style=\"$estilos[1]\">$array[10]</td>
+           </tr>";
+            }
+        }
+
+    }
     function clientes_excel()
     {
         require("./conectar.php");

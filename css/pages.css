@@ -51,6 +51,12 @@ width: 100%;
 height: 100vh;
 
 }
+#pesq{
+opacity: 0;
+}
+#pesq:hover{
+    opacity: 1;
+  }
 .bordaT {
 
     border-style:groove;

@@ -25,22 +25,20 @@ $_SESSION[('pdf')] = "";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 -->
     <link rel="icon" type="image/x-icon" href="/img/favico.ico">
     <link rel="stylesheet" href="css/pages.css">
-    <link rel="stylesheet" type="text/css" href="css/form.css" />
+    <link rel="stylesheet" href="css/form.css" />
     <script src="js/script.js"></script>
     <title>cadastro de Produtos</title>
 </head>
 
 <body>
-    <header class="container">
-        <div class="mt-md-1">
-            <div class="row">
-                <h1 class="titulo centro borda fontebranca">Produtos</h1>
-            </div>
+    <header>
+        <div>
+            <h1 class="titulo centro borda fontebranca">Produtos</h1>
         </div>
     </header>
     <section>
@@ -94,8 +92,10 @@ $_SESSION[('pdf')] = "";
                     </select><span class="titulored"> Obrigatório</span>
                 </p>
                 <p><label class="fontebranca" for="cdescr">Descrição:</label><input type="text" class="bordasimples" value="<?php echo $descr; ?>" name="tdescr" id="cdecsr" size="80" maxlength="80" placeholder="Descrição:"></p>
-                <fieldset id="sexo" class="bordasimples">
-                    <legend></legend>
+                
+            </fieldset>
+                <fieldset class="bordasimples">
+                    <legend>Passe o mouse abaixo para ver todos os produtos</legend>
                     <p><input type="submit" class="button" id="ccadastro" name="tcadastro" value="Novo"> |
                         <input type="submit" class="button" id="calterar" name="talterar" value="Alterar"> |
                         <input type="submit" class="button" id="cdel" name="tdel" value="Deletar">|
@@ -117,9 +117,9 @@ $_SESSION[('pdf')] = "";
         </form>
     </section>
     <section>
-        <div >
+        <div id="pesq" class="bordaT centro ">
             <?php
-            $resposta = $db->produtos();
+                 $resposta = $db->produtos();
             ?>
         </div>
     </section>
