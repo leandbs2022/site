@@ -289,17 +289,20 @@ class site //classe - Funcões
         $valor = 0;
         $anoatual = date('Y');
         $data = rand(2018,  $anoatual);
-        $dia=rand(1,30);
-        $mes=rand(1,12);
-        $datac = $dia.'-'.$mes.'-'.$data; //SELECT * FROM `vendas` WHERE `dt_compra`>'01/01/2018' and `dt_compra`<'01/12/2022';
+        $dia = rand(1, 30);
+        $mes = rand(1, 12);
+        $datac = $dia . '-' . $mes . '-' . $data; //SELECT * FROM `vendas` WHERE `dt_compra`>'01/01/2018' and `dt_compra`<'01/12/2022';
         $dt_venda = $datac;
-        $unid = "1";
+        $unid = "0";
+        $valida = 0;
+        $contar = 0;
 
         $query = mysqli_query($conn, "SELECT * FROM clientes ORDER BY RAND() LIMIT 1") or die(mysqli_error($conn));
         if (mysqli_num_rows($query)) {
             while ($array = mysqli_fetch_row($query)) {
                 $id = $array[0];
             }
+            $valida = 1;
         }
 
         $query = mysqli_query($conn, "SELECT * FROM produtos ORDER BY RAND() LIMIT 1") or die(mysqli_error($conn));
@@ -308,9 +311,18 @@ class site //classe - Funcões
                 $id_p = $array[0];
                 $valor  = $array[2];
             }
+            $valida = 1;
+        }
+        if (empty($id_f)) {
+            $valida = 0;
         }
 
-        $query = mysqli_query($conn, "INSERT INTO `vendas`(`id_clientes`, `id_produtos`, `id_matricula`, `data`, `valor`, `unid`,`dt_compra`) VALUES ('$id','$id_p','$id_f','$data','$valor','$unid','$dt_venda')") or die(mysqli_error($conn));   
+        if ($valida == 1) {
+            $query = mysqli_query($conn, "INSERT INTO `vendas`(`id_clientes`, `id_produtos`, `id_matricula`, `data`, `valor`, `unid`,`dt_compra`) VALUES ('$id','$id_p','$id_f','$data','$valor','$unid','$dt_venda')") or die(mysqli_error($conn)); 
+        } else {
+            $contar = $contar + 1;
+            if($contar == 1){echo "<h6>Não existe informação para gerar vendas (Falta informação do Clientes, Produtos ou Funcionário)</6>";}
+        }
     }
     //contador de acesso
     function contador_ver()

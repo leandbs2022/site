@@ -18,6 +18,11 @@ $c = 0;
 $d = 0;
 $e = 0;
 
+$lucroa = 0;
+$lucrob = 0;
+$lucroc = 0;
+$lucrod = 0;
+$lucroe = 0;
 
 $seg = "";
 $ter = "";
@@ -47,7 +52,6 @@ $dom = "";
     <script src="js/script.js"></script>
     <title>main</title>
 </head>
-
 <body>
     <?php
 
@@ -101,40 +105,83 @@ $dom = "";
     $pedidos = mysqli_num_rows($query);
 
 
-    $sql = "SELECT * FROM `vendas` WHERE `data`='2018';";
+    $sql = "SELECT * FROM `vendas` WHERE `data`='2018'";
     $query = mysqli_query($conn, $sql);
     $a = mysqli_num_rows($query);
 
-    $sql = "SELECT * FROM `vendas` WHERE `data`='2019';";
+    $sql = "SELECT * FROM `vendas` WHERE `data`='2019'";
     $query = mysqli_query($conn, $sql);
     $b = mysqli_num_rows($query);
 
-    $sql = "SELECT * FROM `vendas` WHERE `data`='2020';";
+    $sql = "SELECT * FROM `vendas` WHERE `data`='2020'";
     $query = mysqli_query($conn, $sql);
     $c = mysqli_num_rows($query);
 
-    $sql = "SELECT * FROM `vendas` WHERE `data`='2021';";
+    $sql = "SELECT * FROM `vendas` WHERE `data`='2021'";
     $query = mysqli_query($conn, $sql);
     $d = mysqli_num_rows($query);
 
-    $sql = "SELECT * FROM `vendas` WHERE `data`='2022';";
+    $sql = "SELECT * FROM `vendas` WHERE `data`='2022'";
     $query = mysqli_query($conn, $sql);
     $e = mysqli_num_rows($query);
 
-    $sql = "SELECT * FROM `vendas` WHERE `dt_compra`>='$datai' and `dt_compra`<='$dataf';";
+    /*$sql = "SELECT * FROM `vendas` WHERE `dt_compra`>='$datai' and `dt_compra`<='$dataf';";
     $query = mysqli_query($conn, $sql);
-    $e = mysqli_num_rows($query);
+    $e = mysqli_num_rows($query);*/
     
     $crescimento = $pedidos - 50 / 100 . '%';
 
+   $sql = "SELECT * FROM `vendas` WHERE `data`>='2018' and `data`<='2018'";
+    $query = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($query)) {
+        while ($array = mysqli_fetch_row($query)) {
+            $lucroa = $lucroa + $array[5];
+         }
+        
+        }
+
+    $sql = "SELECT * FROM `vendas` WHERE `data`>='2019' and `data`<='2019'";
+    $query = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($query)) {
+        while ($array = mysqli_fetch_row($query)) {
+            $lucrob = $lucrob + $array[5];
+         }
+        
+        }
+
+        $sql = "SELECT * FROM `vendas` WHERE `data`>='2020' and `data`<='2020'";
+        $query = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($query)) {
+            while ($array = mysqli_fetch_row($query)) {
+                $lucroc = $lucroc + $array[5];
+             }
+           
+            }
+
+    $sql = "SELECT * FROM `vendas` WHERE `data`>='2021' and `data`<='2021'";
+    $query = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($query)) {
+        while ($array = mysqli_fetch_row($query)) {
+            $lucrod = $lucrod + $array[5];
+         }
+   
+        }
+
+    $sql = "SELECT * FROM `vendas` WHERE `data`>='2022' and `data`<='2022'";
+    $query = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($query)) {
+        while ($array = mysqli_fetch_row($query)) {
+            $lucroe = $lucroe + $array[5];
+         }
+         
+        }
 
     ?>
-
-    <header class="container-fluid">
+    <header class="container">
         <div class="mt-md-1">
             <div class="row">
                 <h1 class="alert alert-dark titulo centro borda" style="color:#cccccc; background-color:#292727;">DashBord</h1>
-                <input type="submit" class="btn btn-dark" style="background-color:#292727" value="Alterar tela" onclick="toggleFullScreen()">
+                <input type="submit" class="card3" value="Alterar tela" onclick="toggleFullScreen()">
             </div>
         </div>
     </header>
@@ -144,29 +191,33 @@ $dom = "";
                 <div class="row">
                     <div class="col-md-2 mx-auto bordaindice card centro borda">
                         <p id="titulob">Clientes</p>
+                        <p>Clientes recentes</p>
                         <p id="resultado"><?php echo $clientes; ?></p>
-                        <p id="indice">Crescimento nos últimos 30 diase</p>
+                        <p id="indice">últimos 30 dias</p>
                     </div>
                     <div class="col-md-2 mx-auto bordaindice card1 centro borda">
                         <p id="titulob">Pedidos</p>
+                        <p>Pedidos Atual</p>
                         <p id="resultado"><?php echo $pedidos; ?></p>
-                        <p id="indice">Crescimento nos últimos 30 dias</p>
+                        <p id="indice">últimos 30 dias</p>
                     </div>
                     <div class="col-md-2 mx-auto bordaindice card2 centro borda">
                         <p id="titulob">Lucro</p>
+                        <p>Lucro atual</p>
                         <p id="resultado"><?php echo " R$ " . $lucro; ?></p>
-                        <p id="indice">Crescimento nos últimos 30 dias</p>
+                        <p id="indice">últimos 30 dias</p>
                     </div>
                     <div class="col-md-2  mx-auto bordaindice card3 centro borda">
                         <p id="titulob">Crescimento</p>
                         <p id="resultado"><?php echo $crescimento; ?></p>
                         <p>Estimativa de 100 vendas</p>
-                        <p id="indice">Crescimento nos ultimos 30 dias</p>
+                        <p id="indice">últimos 30 dias</p>
                         
                     </div>
                 </div>
             </div>
         </div><br>
+        <div class=" container card2"><p id="indice" >Visão gráfica dos dados</p></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-6 menu">
@@ -243,12 +294,56 @@ $dom = "";
                 </div>
             </div>
         </div>
+<br><br>
+<div class="container">
+            <div class="row">
+                <div class="col-md-6 menu">
+                <p class="centro">Lucro Anual</p>
+                    <canvas id="graficolucro" style="width:100%;max-width:600px"></canvas>
+
+                    <script>
+                        var xValues = ["2018", "2019", "2020", "2021", "2022"];
+                        var yValues = [<?= $lucroa ?>, <?= $lucrob ?>, <?= $lucroc ?>, <?= $lucrod ?>, <?= $lucroe ?>];
+                        var barColors = [
+                            "rgba(245, 40, 145, 0.8)",
+                            "rgba(39, 245, 67, 0.8)",
+                            "rgba(39, 245, 234, 0.78)",
+                            "rgba(245, 213, 39, 0.8)",
+                            "rgba(39, 58, 245, 0.8)"
+                        ];
+
+                        new Chart("graficolucro", {
+                            type: "bar",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    backgroundColor: barColors,
+                                    data: yValues
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }],
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
         </div>
         </div>
         <div>
     </section>
 
 
-</body>
+</bod'y>
 
 </html>

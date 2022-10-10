@@ -13,13 +13,13 @@ body {
     padding-left: 25px;
     padding-right: 25px;
 }
-
 .titulo {
     margin-top: 10px;
     padding-left: 20px;
+
+
     padding-right: 20px;
 }
-
 .card {
     background-color: cornflowerblue;
     color: #e3f2fd
@@ -37,13 +37,14 @@ body {
     color: #e3f2fd
 }
 #titulob {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
+    border-style: groove;
 }
 #indice {
     border-radius: 5px;
     box-shadow: 5px 5px 5px 5px#0a0a0a;
-    font-size:10px;
+    font-size:20px;
     font-style: italic;
 }
 .bordaindice{
@@ -96,6 +97,7 @@ border-radius: 20%;
 
 .direita {
     text-align: right;
+    justify-items: right;
 }
 
 .borda {

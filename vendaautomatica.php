@@ -48,11 +48,11 @@ $count = 0;
                 //cadastro de venda automatico
                 if (isset($_POST['tcadastro'])) {
                     $reg = $_POST['treg'];
+                    $val = $_POST['treg'];
                     for ($i=0; $i < $reg; $i++) { 
                         $count++;
                         $resposta = $db->vendas_automatica();
                        if($count == $reg){
-                        echo "<script>alert('Registros criados com sucesso!!!')</script>";
                         $color = "#ffffff";
                         $query = mysqli_query($conn, "SELECT * FROM vendas WHERE 1")  or die(mysqli_error($conn));
                         if (mysqli_num_rows($query)) {
